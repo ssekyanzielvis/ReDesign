@@ -1,0 +1,818 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Glovo Redesign - Low-Fi Prototype (All Screens)</title>
+    <style>
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Courier New', monospace;
+        }
+        
+        body {
+            background-color: #e8e8e8;
+            color: #333;
+            padding: 10px;
+            line-height: 1.3;
+            overflow: hidden;
+            height: 100vh;
+        }
+        
+        /* Main Container */
+        .prototype-container {
+            max-width: 100%;
+            height: 100vh;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+        
+        .prototype-title {
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 3px;
+            text-transform: uppercase;
+        }
+        
+        .prototype-subtitle {
+            text-align: center;
+            font-size: 10px;
+            color: #666;
+            margin-bottom: 8px;
+        }
+        
+        /* Task Legend */
+        .task-legend {
+            background-color: #fff;
+            border: 2px solid #333;
+            padding: 8px 10px;
+            margin-bottom: 8px;
+            flex-shrink: 0;
+        }
+        
+        .task-legend h2 {
+            margin-bottom: 6px;
+            text-decoration: underline;
+            font-size: 12px;
+        }
+        
+        .task-items-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 8px;
+        }
+        
+        .task-item {
+            padding: 6px;
+            background-color: #f9f9f9;
+            border-left: 3px solid #333;
+            font-size: 9px;
+            line-height: 1.4;
+        }
+        
+        .task-item strong {
+            display: block;
+            margin-bottom: 3px;
+            font-size: 10px;
+        }
+        
+        /* Flow Arrows */
+        .flow-container {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 5px;
+            flex: 1;
+            overflow: hidden;
+            margin-bottom: 5px;
+        }
+        
+        .flow-arrow {
+            display: none;
+        }
+        
+        /* Screen Frame */
+        .screen {
+            background-color: #fff;
+            border: 2px solid #333;
+            padding: 0;
+            box-shadow: 2px 2px 0px rgba(0,0,0,0.2);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            min-height: 0;
+        }
+        
+        .screen-header {
+            background-color: #333;
+            color: #fff;
+            padding: 4px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 9px;
+            flex-shrink: 0;
+        }
+        
+        .screen-content {
+            padding: 6px;
+            overflow-y: auto;
+            overflow-x: hidden;
+            font-size: 8px;
+            flex: 1;
+            min-height: 0;
+        }
+        
+        .screen-content::-webkit-scrollbar {
+            width: 4px;
+        }
+        
+        .screen-content::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        
+        .screen-content::-webkit-scrollbar-thumb {
+            background: #888;
+        }
+        
+        /* Wireframe Elements */
+        .wire-header {
+            border: 1px solid #333;
+            padding: 4px;
+            margin-bottom: 4px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #f5f5f5;
+        }
+        
+        .wire-logo {
+            font-weight: bold;
+            font-size: 8px;
+        }
+        
+        .wire-icons {
+            display: flex;
+            gap: 3px;
+        }
+        
+        .wire-icon {
+            width: 8px;
+            height: 8px;
+            border: 1px solid #333;
+            border-radius: 50%;
+        }
+        
+        .wire-search {
+            border: 1px solid #333;
+            padding: 4px;
+            margin-bottom: 4px;
+            background-color: #fff;
+            text-align: center;
+            color: #999;
+            font-size: 7px;
+        }
+        
+        .wire-section-title {
+            font-weight: bold;
+            margin: 4px 0 3px 0;
+            padding-bottom: 2px;
+            border-bottom: 1px solid #333;
+            text-transform: uppercase;
+            font-size: 7px;
+        }
+        
+        .wire-deals {
+            display: flex;
+            gap: 3px;
+            overflow-x: auto;
+            margin-bottom: 4px;
+        }
+        
+        .wire-deal-card {
+            border: 1px solid #333;
+            padding: 4px;
+            min-width: 50px;
+            background-color: #fff;
+            font-size: 6px;
+        }
+        
+        .wire-badge {
+            background-color: #333;
+            color: #fff;
+            padding: 2px 3px;
+            font-size: 6px;
+            display: inline-block;
+            margin-bottom: 2px;
+            font-weight: bold;
+        }
+        
+        .wire-badge.highlight {
+            background-color: #ff0000;
+        }
+        
+        .wire-filter {
+            border: 1px dashed #666;
+            padding: 4px;
+            margin-bottom: 4px;
+            background-color: #fafafa;
+            font-size: 7px;
+        }
+        
+        .wire-slider {
+            height: 2px;
+            background-color: #333;
+            margin: 3px 0;
+            position: relative;
+        }
+        
+        .wire-slider-thumb {
+            width: 6px;
+            height: 6px;
+            background-color: #333;
+            border-radius: 50%;
+            position: absolute;
+            top: -2px;
+            left: 30%;
+        }
+        
+        .wire-inputs {
+            display: flex;
+            gap: 3px;
+            margin-top: 3px;
+        }
+        
+        .wire-input {
+            flex: 1;
+            border: 1px solid #333;
+            padding: 2px;
+            text-align: center;
+            background-color: #fff;
+            font-size: 6px;
+        }
+        
+        .wire-restaurant-card {
+            border: 1px solid #333;
+            padding: 4px;
+            margin-bottom: 4px;
+            display: flex;
+            gap: 4px;
+            cursor: pointer;
+            background-color: #fff;
+        }
+        
+        .wire-restaurant-card:hover {
+            background-color: #f9f9f9;
+        }
+        
+        .wire-img-placeholder {
+            width: 25px;
+            height: 25px;
+            border: 1px solid #333;
+            background: repeating-linear-gradient(
+                45deg,
+                #f0f0f0,
+                #f0f0f0 3px,
+                #e0e0e0 3px,
+                #e0e0e0 6px
+            );
+            flex-shrink: 0;
+        }
+        
+        .wire-restaurant-info {
+            flex: 1;
+            font-size: 6px;
+            line-height: 1.3;
+        }
+        
+        .wire-restaurant-name {
+            font-weight: bold;
+            font-size: 7px;
+            margin-bottom: 2px;
+        }
+        
+        .wire-tag {
+            display: inline-block;
+            border: 1px solid #333;
+            padding: 1px 3px;
+            font-size: 5px;
+            margin-top: 2px;
+            background-color: #fff;
+        }
+        
+        .wire-menu-item {
+            border: 1px solid #333;
+            padding: 4px;
+            margin-bottom: 3px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #fff;
+        }
+        
+        .wire-menu-info {
+            flex: 1;
+            font-size: 6px;
+            line-height: 1.3;
+        }
+        
+        .wire-menu-name {
+            font-weight: bold;
+            font-size: 7px;
+            margin-bottom: 2px;
+        }
+        
+        .wire-button {
+            border: 1px solid #333;
+            background-color: #333;
+            color: #fff;
+            padding: 3px 6px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 6px;
+            text-align: center;
+            white-space: nowrap;
+        }
+        
+        .wire-button:hover {
+            background-color: #555;
+        }
+        
+        .wire-button.secondary {
+            background-color: #fff;
+            color: #333;
+        }
+        
+        .wire-cart-icon {
+            position: absolute;
+            bottom: 6px;
+            right: 6px;
+            width: 20px;
+            height: 20px;
+            border: 2px solid #333;
+            border-radius: 50%;
+            background-color: #333;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 10px;
+        }
+        
+        .wire-cart-items {
+            margin-bottom: 4px;
+        }
+        
+        .wire-cart-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 3px;
+            border-bottom: 1px solid #333;
+            font-size: 6px;
+        }
+        
+        .wire-cost-summary {
+            border: 1px solid #333;
+            padding: 4px;
+            margin-top: 4px;
+            background-color: #fafafa;
+        }
+        
+        .wire-cost-line {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 2px;
+            font-size: 6px;
+        }
+        
+        .wire-cost-line.total {
+            font-weight: bold;
+            font-size: 7px;
+            border-top: 1px solid #333;
+            padding-top: 3px;
+            margin-top: 3px;
+        }
+        
+        .wire-back-btn {
+            border: 1px solid #333;
+            padding: 3px 6px;
+            display: inline-block;
+            margin-bottom: 4px;
+            cursor: pointer;
+            background-color: #fff;
+            font-weight: bold;
+            font-size: 7px;
+        }
+        
+        .wire-back-btn:hover {
+            background-color: #f0f0f0;
+        }
+        
+        /* Screen positioning */
+        .screen.relative {
+            position: relative;
+        }
+        
+        /* Annotations */
+        .annotation {
+            background-color: #ffeb3b;
+            border: 1px solid #333;
+            padding: 3px;
+            margin-top: 3px;
+            font-size: 6px;
+            font-style: italic;
+            line-height: 1.3;
+        }
+        
+        .annotation:before {
+            content: "📌 ";
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 1400px) {
+            .prototype-title {
+                font-size: 14px;
+            }
+            .task-legend h2 {
+                font-size: 10px;
+            }
+            .task-item {
+                font-size: 7px;
+            }
+        }
+        
+        @media (max-width: 1000px) {
+            .flow-container {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            .screen:nth-child(4), .screen:nth-child(5) {
+                grid-column: span 1;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 5px;
+            }
+            .prototype-title {
+                font-size: 12px;
+            }
+            .task-items-grid {
+                grid-template-columns: 1fr;
+            }
+            .flow-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Main Prototype Container -->
+    <div class="prototype-container">
+        <h1 class="prototype-title">🍔 Glovo Redesign - Low-Fidelity Prototype</h1>
+        <p class="prototype-subtitle">All Screens Visible | Task-Focused Design | Gerald's User Journey</p>
+        
+        <!-- Task Legend -->
+        <div class="task-legend">
+            <h2>📋 Three Core Tasks (HMW Solutions)</h2>
+            <div class="task-items-grid">
+                <div class="task-item">
+                    <strong>TASK 1: Filter by Budget</strong>
+                    Gerald wants meals costing 15K-25K UGX<br>
+                    Flow: Homepage → Budget Filter → Results
+                </div>
+                <div class="task-item">
+                    <strong>TASK 2: Find Deals</strong>
+                    Gerald wants "Buy One Get One" offers<br>
+                    Flow: Homepage → Deals → Details
+                </div>
+                <div class="task-item">
+                    <strong>TASK 3: Cost Transparency</strong>
+                    Gerald wants full cost breakdown<br>
+                    Flow: Restaurant → Cart → Checkout
+                </div>
+            </div>
+        </div>
+        
+        <!-- SCREEN FLOW -->
+        <div class="flow-container">
+            <!-- Screen 1: Homepage -->
+            <div class="screen relative">
+                <div class="screen-header">SCREEN 1: HOMEPAGE</div>
+                <div class="screen-content">
+                    <!-- Header -->
+                    <div class="wire-header">
+                        <div class="wire-logo">[GLOVO LOGO]</div>
+                        <div class="wire-icons">
+                            <div class="wire-icon"></div>
+                            <div class="wire-icon"></div>
+                            <div class="wire-icon"></div>
+                        </div>
+                    </div>
+                    
+                    <!-- Search Bar -->
+                    <div class="wire-search">
+                        🔍 Search restaurants or food...
+                    </div>
+                    
+                    <!-- Deals Section - TASK 2 -->
+                    <div class="wire-section-title">⭐ Today's Best Deals</div>
+                    <div class="wire-deals">
+                        <div class="wire-deal-card">
+                            <div class="wire-badge">30% OFF</div>
+                            <div>Selected restaurants</div>
+                        </div>
+                        <div class="wire-deal-card">
+                            <div class="wire-badge highlight">BOGO</div>
+                            <div>Buy 1 Get 1 Free on pizzas</div>
+                        </div>
+                        <div class="wire-deal-card">
+                            <div class="wire-badge">FREE DELIVERY</div>
+                            <div>Orders over 25K UGX</div>
+                        </div>
+                    </div>
+                    
+                    <div class="annotation">
+                        TASK 2: Deals prominently displayed
+                    </div>
+                    
+                    <!-- Browse Button -->
+                    <div class="wire-button" style="margin-top: 4px; width: 100%;">
+                        → Browse Restaurants
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Screen 2: Browse with Budget Filter -->
+            <div class="screen relative">
+                <div class="screen-header">SCREEN 2: BROWSE & FILTER</div>
+                <div class="screen-content">
+                    <!-- Header -->
+                    <div class="wire-header">
+                        <div class="wire-logo">[GLOVO LOGO]</div>
+                        <div class="wire-icons">
+                            <div class="wire-icon"></div>
+                            <div class="wire-icon"></div>
+                        </div>
+                    </div>
+                    
+                    <!-- Budget Filter - TASK 1 -->
+                    <div class="wire-filter">
+                        <div style="font-weight: bold; margin-bottom: 3px;">💰 BUDGET FILTER</div>
+                        <div class="wire-slider">
+                            <div class="wire-slider-thumb"></div>
+                            <div class="wire-slider-thumb" style="left: 60%;"></div>
+                        </div>
+                        <div class="wire-inputs">
+                            <div class="wire-input">Min: 15K</div>
+                            <div class="wire-input">Max: 25K</div>
+                        </div>
+                        <div class="wire-button secondary" style="margin-top: 3px; width: 100%;">
+                            Apply
+                        </div>
+                    </div>
+                    
+                    <div class="annotation">
+                        TASK 1: Set budget 15K-25K
+                    </div>
+                    
+                    <!-- Filtered Restaurant List -->
+                    <div class="wire-section-title">🍽️ Filtered (3)</div>
+                    
+                    <div class="wire-restaurant-card">
+                        <div class="wire-img-placeholder"></div>
+                        <div class="wire-restaurant-info">
+                            <div class="wire-restaurant-name">Chicken Tonight</div>
+                            <div>Fast Food • 15-25 min</div>
+                            <div style="font-weight: bold; margin-top: 2px;">18K UGX</div>
+                            <div class="wire-tag">20% OFF</div>
+                        </div>
+                    </div>
+                    
+                    <div class="wire-restaurant-card">
+                        <div class="wire-img-placeholder"></div>
+                        <div class="wire-restaurant-info">
+                            <div class="wire-restaurant-name">Burger Hub</div>
+                            <div>American • 10-20 min</div>
+                            <div style="font-weight: bold; margin-top: 2px;">15K UGX</div>
+                            <div class="wire-tag">BOGO</div>
+                        </div>
+                    </div>
+                    
+                    <div class="wire-restaurant-card">
+                        <div class="wire-img-placeholder"></div>
+                        <div class="wire-restaurant-info">
+                            <div class="wire-restaurant-name">Rolex Corner</div>
+                            <div>Local • 5-15 min</div>
+                            <div style="font-weight: bold; margin-top: 2px;">20K UGX</div>
+                            <div class="wire-tag">FREE DEL</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Screen 3: Restaurant Menu Page -->
+            <div class="screen relative">
+                <div class="screen-header">SCREEN 3: RESTAURANT MENU</div>
+                <div class="screen-content">
+                    <!-- Back Button -->
+                    <div class="wire-back-btn">← Back to Browse</div>
+                    
+                    <!-- Restaurant Info -->
+                    <div style="border: 1px solid #333; padding: 4px; margin-bottom: 4px; background-color: #f9f9f9;">
+                        <div style="font-weight: bold; font-size: 8px; margin-bottom: 2px;">Chicken Tonight</div>
+                        <div style="font-size: 6px;">Fast Food • 15-25 min</div>
+                        <div style="font-size: 6px;">Avg: 18K UGX</div>
+                        <div class="wire-badge" style="margin-top: 2px;">20% OFF</div>
+                    </div>
+                    
+                    <!-- Menu Items -->
+                    <div class="wire-section-title">📖 Menu</div>
+                    
+                    <div class="wire-menu-item">
+                        <div class="wire-menu-info">
+                            <div class="wire-menu-name">Burger Meal</div>
+                            <div>Burger+Fries+Drink</div>
+                            <div style="font-weight: bold; margin-top: 2px;">18K</div>
+                        </div>
+                        <div class="wire-button">ADD</div>
+                    </div>
+                    
+                    <div class="wire-menu-item">
+                        <div class="wire-menu-info">
+                            <div class="wire-menu-name">Grilled Chicken</div>
+                            <div>With vegetables</div>
+                            <div style="font-weight: bold; margin-top: 2px;">22K</div>
+                        </div>
+                        <div class="wire-button">ADD</div>
+                    </div>
+                    
+                    <div class="wire-menu-item">
+                        <div class="wire-menu-info">
+                            <div class="wire-menu-name">French Fries</div>
+                            <div>Large portion</div>
+                            <div style="font-weight: bold; margin-top: 2px;">5K</div>
+                        </div>
+                        <div class="wire-button">ADD</div>
+                    </div>
+                    
+                    <div class="wire-menu-item">
+                        <div class="wire-menu-info">
+                            <div class="wire-menu-name">Cola</div>
+                            <div>500ml</div>
+                            <div style="font-weight: bold; margin-top: 2px;">3K</div>
+                        </div>
+                        <div class="wire-button">ADD</div>
+                    </div>
+                    
+                    <!-- Cart Icon -->
+                    <div class="wire-cart-icon">3</div>
+                </div>
+            </div>
+            
+            <!-- Screen 4: Cart with Cost Breakdown -->
+            <div class="screen relative">
+                <div class="screen-header">SCREEN 4: CART & CHECKOUT</div>
+                <div class="screen-content">
+                    <!-- Back Button -->
+                    <div class="wire-back-btn">← Back</div>
+                    
+                    <div class="wire-section-title">🛒 Cart (3)</div>
+                    
+                    <!-- Cart Items -->
+                    <div class="wire-cart-items">
+                        <div class="wire-cart-item">
+                            <div>
+                                <div style="font-weight: bold;">Burger Meal</div>
+                            </div>
+                            <div style="font-weight: bold;">18K</div>
+                        </div>
+                        <div class="wire-cart-item">
+                            <div>
+                                <div style="font-weight: bold;">Fries</div>
+                            </div>
+                            <div style="font-weight: bold;">5K</div>
+                        </div>
+                        <div class="wire-cart-item">
+                            <div>
+                                <div style="font-weight: bold;">Cola</div>
+                            </div>
+                            <div style="font-weight: bold;">3K</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Cost Breakdown - TASK 3 -->
+                    <div class="wire-cost-summary">
+                        <div style="font-weight: bold; margin-bottom: 3px; text-align: center; font-size: 7px;">💳 COST BREAKDOWN</div>
+                        
+                        <div class="wire-cost-line">
+                            <div>Subtotal</div>
+                            <div>26K</div>
+                        </div>
+                        <div class="wire-cost-line">
+                            <div>Discount (20%)</div>
+                            <div style="color: green;">-5.2K</div>
+                        </div>
+                        <div class="wire-cost-line">
+                            <div>Delivery</div>
+                            <div>3K</div>
+                        </div>
+                        <div class="wire-cost-line">
+                            <div>Service Fee</div>
+                            <div>1.5K</div>
+                        </div>
+                        <div class="wire-cost-line">
+                            <div>Tax (18%)</div>
+                            <div>3.7K</div>
+                        </div>
+                        <div class="wire-cost-line total">
+                            <div>TOTAL</div>
+                            <div>29K UGX</div>
+                        </div>
+                    </div>
+                    
+                    <div class="annotation">
+                        TASK 3: Full cost breakdown
+                    </div>
+                    
+                    <!-- Checkout Button -->
+                    <div class="wire-button" style="margin-top: 4px; width: 100%; padding: 4px;">
+                        ✓ CHECKOUT
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Screen 5: Deal Details -->
+            <div class="screen relative">
+                <div class="screen-header">SCREEN 5: DEAL DETAILS</div>
+                <div class="screen-content">
+                    <!-- Back Button -->
+                    <div class="wire-back-btn">← Back</div>
+                    
+                    <!-- Deal Header -->
+                    <div style="border: 2px solid #ff0000; padding: 6px; margin-bottom: 4px; background-color: #fff5f5; text-align: center;">
+                        <div class="wire-badge highlight" style="font-size: 8px; padding: 3px 6px; margin-bottom: 3px;">
+                            BUY 1 GET 1
+                        </div>
+                        <div style="font-size: 7px; font-weight: bold; margin-bottom: 2px;">
+                            Pizza Special
+                        </div>
+                        <div style="font-size: 6px;">
+                            Valid: Oct 31, 2025
+                        </div>
+                    </div>
+                    
+                    <div class="wire-section-title">📋 Details</div>
+                    <div style="font-size: 6px; line-height: 1.5; margin-bottom: 4px; padding: 4px; border: 1px solid #ccc;">
+                        • Buy large pizza, get 1 free<br>
+                        • Participating restaurants<br>
+                        • No combo with other offers<br>
+                        • Min order: 25K UGX
+                    </div>
+                    
+                    <div class="wire-section-title">🍕 Restaurants</div>
+                    
+                    <div class="wire-restaurant-card">
+                        <div class="wire-img-placeholder"></div>
+                        <div class="wire-restaurant-info">
+                            <div class="wire-restaurant-name">Pizza Palace</div>
+                            <div>Italian • 20-30 min</div>
+                            <div style="font-weight: bold; margin-top: 2px;">30K</div>
+                            <div class="wire-tag">BOGO</div>
+                        </div>
+                    </div>
+                    
+                    <div class="wire-restaurant-card">
+                        <div class="wire-img-placeholder"></div>
+                        <div class="wire-restaurant-info">
+                            <div class="wire-restaurant-name">Domino's</div>
+                            <div>Fast Food • 25-35 min</div>
+                            <div style="font-weight: bold; margin-top: 2px;">28K</div>
+                            <div class="wire-tag">BOGO</div>
+                        </div>
+                    </div>
+                    
+                    <div class="wire-restaurant-card">
+                        <div class="wire-img-placeholder"></div>
+                        <div class="wire-restaurant-info">
+                            <div class="wire-restaurant-name">Italian Corner</div>
+                            <div>Italian • 15-25 min</div>
+                            <div style="font-weight: bold; margin-top: 2px;">25K</div>
+                            <div class="wire-tag">BOGO</div>
+                        </div>
+                    </div>
+                    
+                    <div class="wire-button" style="margin-top: 4px; width: 100%;">
+                        Browse →
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
