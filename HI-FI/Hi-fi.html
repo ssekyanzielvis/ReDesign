@@ -287,6 +287,99 @@
             color: var(--primary);
         }
 
+        /* Additional Filters */
+        .filters-row {
+            display: flex;
+            gap: 10px;
+            padding: 15px 20px;
+            background-color: white;
+            border-bottom: 1px solid var(--border);
+            overflow-x: auto;
+            scrollbar-width: none;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .filters-row::-webkit-scrollbar {
+            display: none;
+        }
+
+        .filter-chip {
+            padding: 10px 18px;
+            border: 2px solid var(--border);
+            border-radius: 25px;
+            background-color: white;
+            cursor: pointer;
+            transition: var(--transition);
+            white-space: nowrap;
+            font-size: 14px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-shrink: 0;
+        }
+
+        .filter-chip:hover {
+            border-color: var(--primary);
+            background-color: rgba(0, 160, 130, 0.05);
+        }
+
+        .filter-chip.active {
+            background-color: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        .filter-chip i {
+            font-size: 12px;
+        }
+
+        .sort-dropdown {
+            position: relative;
+        }
+
+        .sort-menu {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            margin-top: 8px;
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 8px 0;
+            min-width: 200px;
+            display: none;
+            z-index: 100;
+        }
+
+        .sort-menu.active {
+            display: block;
+        }
+
+        .sort-option {
+            padding: 12px 20px;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .sort-option:hover {
+            background-color: var(--light);
+        }
+
+        .sort-option.selected {
+            background-color: rgba(0, 160, 130, 0.1);
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .sort-option i {
+            font-size: 14px;
+        }
+
         .budget-filter {
             display: flex;
             flex-direction: column;
@@ -664,6 +757,156 @@
             font-weight: 700;
         }
 
+        /* Bottom Navigation Bar */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            max-width: 480px;
+            background: white;
+            border-top: 1px solid var(--border);
+            display: flex;
+            justify-content: space-around;
+            padding: 12px 0 env(safe-area-inset-bottom);
+            z-index: 95;
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .nav-item {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 5px;
+            cursor: pointer;
+            transition: var(--transition);
+            padding: 8px;
+            color: var(--gray);
+            position: relative;
+        }
+
+        .nav-item.active {
+            color: var(--primary);
+        }
+
+        .nav-item i {
+            font-size: 22px;
+        }
+
+        .nav-item span {
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .nav-item:hover {
+            color: var(--primary);
+        }
+
+        .nav-badge {
+            position: absolute;
+            top: 4px;
+            right: calc(50% - 18px);
+            background-color: var(--secondary);
+            color: white;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 10px;
+            font-weight: 700;
+        }
+
+        /* Food Items Grid */
+        .food-items-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+            gap: 15px;
+            padding: 20px;
+        }
+
+        .food-item-card {
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            overflow: hidden;
+            background: white;
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .food-item-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow);
+            border-color: var(--primary);
+        }
+
+        .food-item-image {
+            width: 100%;
+            height: 120px;
+            background: linear-gradient(135deg, #FF9A8B, #FF6A88);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 10px;
+            font-weight: 700;
+            text-align: center;
+            padding: 10px;
+        }
+
+        .food-item-image:nth-child(2n) {
+            background: linear-gradient(135deg, #6A11CB, #2575FC);
+        }
+
+        .food-item-image:nth-child(3n) {
+            background: linear-gradient(135deg, #42E695, #3BB2B8);
+        }
+
+        .food-item-info {
+            padding: 12px;
+        }
+
+        .food-item-restaurant {
+            font-size: 11px;
+            color: var(--gray);
+            margin-bottom: 4px;
+        }
+
+        .food-item-name {
+            font-weight: 600;
+            font-size: 14px;
+            margin-bottom: 8px;
+            line-height: 1.3;
+        }
+
+        .food-item-price {
+            font-weight: 700;
+            color: var(--primary);
+            font-size: 15px;
+            margin-bottom: 10px;
+        }
+
+        .food-item-btn {
+            width: 100%;
+            padding: 8px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 13px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .food-item-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+        }
+
         /* Overlay Pages */
         .overlay-page {
             display: none;
@@ -863,10 +1106,197 @@
             transform: none;
         }
 
+        /* Payment Method Section */
+        .payment-section {
+            padding: 20px;
+            margin-top: 20px;
+        }
+
+        .payment-title {
+            font-weight: 700;
+            font-size: 18px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .payment-title i {
+            color: var(--primary);
+        }
+
+        .payment-options {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .payment-option {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            border: 2px solid var(--border);
+            border-radius: var(--radius);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .payment-option:hover {
+            border-color: var(--primary);
+            background-color: rgba(0, 160, 130, 0.05);
+        }
+
+        .payment-option.selected {
+            border-color: var(--primary);
+            background-color: rgba(0, 160, 130, 0.1);
+        }
+
+        .payment-option input[type="radio"] {
+            width: 20px;
+            height: 20px;
+            margin-right: 15px;
+            cursor: pointer;
+            accent-color: var(--primary);
+        }
+
+        .payment-option-content {
+            flex: 1;
+        }
+
+        .payment-option-name {
+            font-weight: 600;
+            font-size: 16px;
+            margin-bottom: 3px;
+        }
+
+        .payment-option-desc {
+            font-size: 13px;
+            color: var(--gray);
+        }
+
+        .payment-option i {
+            font-size: 24px;
+            color: var(--primary);
+        }
+
+        /* Profile Page */
+        .profile-section {
+            padding: 20px;
+        }
+
+        .profile-header {
+            text-align: center;
+            padding: 30px 20px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            margin: -20px -20px 20px;
+            border-radius: 0 0 20px 20px;
+        }
+
+        .profile-avatar {
+            width: 100px;
+            height: 100px;
+            background: white;
+            color: var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 15px;
+            font-size: 40px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .profile-name {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .profile-email {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        .profile-menu {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .profile-menu-item {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .profile-menu-item:hover {
+            background-color: var(--light);
+            border-color: var(--primary);
+        }
+
+        .profile-menu-item i {
+            font-size: 20px;
+            color: var(--primary);
+            width: 30px;
+        }
+
+        .profile-menu-item span {
+            flex: 1;
+            font-weight: 600;
+        }
+
+        .profile-menu-item .fa-chevron-right {
+            color: var(--gray);
+            font-size: 14px;
+        }
+
+        /* Restaurant footer counter */
+        .restaurant-footer {
+            position: sticky;
+            bottom: 0;
+            background: white;
+            border-top: 2px solid var(--border);
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.05);
+            z-index: 10;
+        }
+
+        .total-items {
+            font-weight: 700;
+            font-size: 16px;
+            color: var(--dark);
+        }
+
+        .view-cart-btn {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: var(--radius);
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .view-cart-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+        }
+
         /* Responsive Design */
         @media (max-width: 480px) {
             .container {
                 max-width: 100%;
+                padding-bottom: 80px; /* Space for bottom nav */
             }
 
             .logo {
@@ -934,10 +1364,7 @@
             }
 
             .cart-icon {
-                width: 60px;
-                height: 60px;
-                bottom: 20px;
-                right: 20px;
+                display: none; /* Hide floating cart icon when bottom nav is present */
             }
 
             .cart-icon i {
@@ -957,6 +1384,16 @@
             .checkout-btn {
                 font-size: 16px;
                 padding: 16px;
+            }
+
+            .food-items-grid {
+                grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+                gap: 12px;
+                padding: 15px;
+            }
+
+            .bottom-nav {
+                max-width: 100%;
             }
         }
 
@@ -1016,6 +1453,7 @@
         @media (min-width: 481px) and (max-width: 768px) {
             .container {
                 max-width: 600px;
+                padding-bottom: 80px;
             }
 
             .deals-container {
@@ -1030,11 +1468,16 @@
             .restaurant-list {
                 padding: 0 20px 30px;
             }
+
+            .bottom-nav {
+                max-width: 600px;
+            }
         }
 
         @media (min-width: 769px) {
             .container {
                 max-width: 960px;
+                padding-bottom: 80px;
             }
 
             .restaurant-list {
@@ -1059,6 +1502,14 @@
             .cost-preview-tooltip {
                 min-width: 250px;
             }
+
+            .bottom-nav {
+                max-width: 960px;
+            }
+
+            .food-items-grid {
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            }
         }
 
         @media (min-width: 1024px) {
@@ -1068,6 +1519,10 @@
 
             .restaurant-list {
                 grid-template-columns: repeat(3, 1fr);
+            }
+
+            .bottom-nav {
+                max-width: 1200px;
             }
         }
 
@@ -1426,6 +1881,42 @@
             </div>
         </div>
         
+        <!-- Filters Row -->
+        <div class="filters-row">
+            <div class="filter-chip sort-dropdown" id="sortChip">
+                <i class="fas fa-sort-amount-down"></i>
+                Top Rated
+                <i class="fas fa-chevron-down"></i>
+                <div class="sort-menu" id="sortMenu">
+                    <div class="sort-option selected" data-sort="rating">
+                        <i class="fas fa-star"></i>
+                        Top Rated
+                    </div>
+                    <div class="sort-option" data-sort="delivery">
+                        <i class="fas fa-clock"></i>
+                        Fastest Delivery
+                    </div>
+                    <div class="sort-option" data-sort="price-low">
+                        <i class="fas fa-arrow-down"></i>
+                        Price: Low to High
+                    </div>
+                    <div class="sort-option" data-sort="price-high">
+                        <i class="fas fa-arrow-up"></i>
+                        Price: High to Low
+                    </div>
+                </div>
+            </div>
+            <div class="filter-chip" id="promotionsFilter">
+                <i class="fas fa-tags"></i>
+                Promotions
+            </div>
+            <div class="filter-chip" id="foodTypeFilter">
+                <i class="fas fa-utensils"></i>
+                Food Type
+                <i class="fas fa-chevron-down"></i>
+            </div>
+        </div>
+        
         <!-- Budget Alert -->
         <div class="budget-alert" id="budgetAlert">
             <i class="fas fa-info-circle"></i>
@@ -1494,7 +1985,7 @@
         <!-- Restaurant List -->
         <div class="section-title">
             Restaurants Within Your Budget
-            <span class="see-all">See all</span>
+            <span class="see-all" onclick="showFoodItems()">View Food Items</span>
         </div>
         <div class="restaurant-list" id="restaurantList">
             <!-- Restaurant 1 -->
@@ -1763,10 +2254,36 @@
             </div>
         </div>
         
-        <!-- Cart Icon -->
-        <div class="cart-icon" onclick="showCart()">
-            <i class="fas fa-shopping-bag"></i>
-            <div class="cart-count">3</div>
+        <!-- Bottom Navigation Bar -->
+        <div class="bottom-nav">
+            <div class="nav-item active" onclick="switchTab('home')">
+                <i class="fas fa-home"></i>
+                <span>Home</span>
+            </div>
+            <div class="nav-item" onclick="showCart()">
+                <i class="fas fa-shopping-bag"></i>
+                <span>Cart</span>
+                <div class="nav-badge" id="navCartBadge">3</div>
+            </div>
+            <div class="nav-item" onclick="showProfile()">
+                <i class="fas fa-user"></i>
+                <span>Profile</span>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Food Items Listing Page -->
+    <div class="overlay-page" id="foodItemsPage">
+        <div class="page-header">
+            <div class="close-btn" onclick="hideFoodItems()">
+                <i class="fas fa-arrow-left"></i>
+            </div>
+            <div class="page-title" id="foodItemsTitle">Food Listing</div>
+            <div></div>
+        </div>
+        
+        <div class="food-items-grid" id="foodItemsGrid">
+            <!-- Food items will be dynamically added here -->
         </div>
     </div>
     
@@ -1844,10 +2361,117 @@
             </div>
         </div>
         
+        <!-- Payment Method Section -->
+        <div class="payment-section">
+            <div class="payment-title">
+                <i class="fas fa-credit-card"></i>
+                Select Payment Method
+            </div>
+            <div class="payment-options">
+                <label class="payment-option selected">
+                    <input type="radio" name="payment" value="mobile-money" checked>
+                    <div class="payment-option-content">
+                        <div class="payment-option-name">Mobile Money</div>
+                        <div class="payment-option-desc">MTN, Airtel, or other networks</div>
+                    </div>
+                    <i class="fas fa-mobile-alt"></i>
+                </label>
+                
+                <label class="payment-option">
+                    <input type="radio" name="payment" value="card">
+                    <div class="payment-option-content">
+                        <div class="payment-option-name">Credit/Debit Card</div>
+                        <div class="payment-option-desc">Visa, Mastercard, etc.</div>
+                    </div>
+                    <i class="fas fa-credit-card"></i>
+                </label>
+                
+                <label class="payment-option">
+                    <input type="radio" name="payment" value="cash">
+                    <div class="payment-option-content">
+                        <div class="payment-option-name">Cash on Delivery</div>
+                        <div class="payment-option-desc">Pay when you receive</div>
+                    </div>
+                    <i class="fas fa-money-bill-wave"></i>
+                </label>
+            </div>
+        </div>
+        
         <button class="checkout-btn" onclick="checkout()">
             <i class="fas fa-lock"></i>
             <span>Proceed to Checkout</span>
         </button>
+    </div>
+    
+    <!-- Profile Page -->
+    <div class="overlay-page" id="profilePage">
+        <div class="profile-header">
+            <div class="profile-avatar">
+                <i class="fas fa-user"></i>
+            </div>
+            <div class="profile-name">Student User</div>
+            <div class="profile-email">student@example.com</div>
+        </div>
+        
+        <div class="page-header">
+            <div class="close-btn" onclick="hideProfile()">
+                <i class="fas fa-arrow-left"></i>
+            </div>
+            <div class="page-title">Profile</div>
+            <div></div>
+        </div>
+        
+        <div class="profile-section">
+            <div class="profile-menu">
+                <div class="profile-menu-item">
+                    <i class="fas fa-receipt"></i>
+                    <span>Order History</span>
+                    <i class="fas fa-chevron-right"></i>
+                </div>
+                
+                <div class="profile-menu-item">
+                    <i class="fas fa-heart"></i>
+                    <span>Favorites</span>
+                    <i class="fas fa-chevron-right"></i>
+                </div>
+                
+                <div class="profile-menu-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>Saved Addresses</span>
+                    <i class="fas fa-chevron-right"></i>
+                </div>
+                
+                <div class="profile-menu-item">
+                    <i class="fas fa-wallet"></i>
+                    <span>Payment Methods</span>
+                    <i class="fas fa-chevron-right"></i>
+                </div>
+                
+                <div class="profile-menu-item">
+                    <i class="fas fa-bell"></i>
+                    <span>Notifications</span>
+                    <i class="fas fa-chevron-right"></i>
+                </div>
+                
+                <div class="profile-menu-item">
+                    <i class="fas fa-cog"></i>
+                    <span>Settings</span>
+                    <i class="fas fa-chevron-right"></i>
+                </div>
+                
+                <div class="profile-menu-item">
+                    <i class="fas fa-question-circle"></i>
+                    <span>Help & Support</span>
+                    <i class="fas fa-chevron-right"></i>
+                </div>
+                
+                <div class="profile-menu-item" style="border-color: var(--secondary); color: var(--secondary);">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Logout</span>
+                    <i class="fas fa-chevron-right"></i>
+                </div>
+            </div>
+        </div>
     </div>
     
     <!-- Restaurant Detail Page -->
@@ -1879,7 +2503,11 @@
                     <div class="menu-item-info">
                         <div class="menu-item-name">Chicken Burger Meal</div>
                         <div class="menu-item-desc">Juicy chicken burger served with crispy fries and a refreshing drink</div>
-                        <div class="menu-item-price">18,000 UGX</div>
+                        <div class="menu-item-price">
+                            <span style="text-decoration: line-through; color: var(--gray); font-size: 14px; margin-right: 8px;">20,000 UGX</span>
+                            18,000 UGX
+                            <span style="background: var(--secondary); color: white; padding: 3px 8px; border-radius: 5px; font-size: 12px; margin-left: 8px;">10% OFF</span>
+                        </div>
                         <button class="add-to-cart-btn" onclick="addToCart('Chicken Burger Meal', 18000, 'chicken')">
                             <i class="fas fa-plus"></i> Add to Cart
                         </button>
@@ -1891,7 +2519,11 @@
                     <div class="menu-item-info">
                         <div class="menu-item-name">Grilled Chicken</div>
                         <div class="menu-item-desc">Tender grilled chicken served with fresh vegetables and your choice of sauce</div>
-                        <div class="menu-item-price">22,000 UGX</div>
+                        <div class="menu-item-price">
+                            <span style="text-decoration: line-through; color: var(--gray); font-size: 14px; margin-right: 8px;">25,000 UGX</span>
+                            22,000 UGX
+                            <span style="background: var(--secondary); color: white; padding: 3px 8px; border-radius: 5px; font-size: 12px; margin-left: 8px;">12% OFF</span>
+                        </div>
                         <button class="add-to-cart-btn" onclick="addToCart('Grilled Chicken', 22000, 'grilled')">
                             <i class="fas fa-plus"></i> Add to Cart
                         </button>
@@ -1928,6 +2560,16 @@
                 </div>
             </div>
         </div>
+        
+        <!-- Restaurant Footer with Total Items -->
+        <div class="restaurant-footer">
+            <div class="total-items">
+                <i class="fas fa-shopping-bag"></i> Total Items: <span id="restaurantCartCount">0</span>
+            </div>
+            <button class="view-cart-btn" onclick="showCart()">
+                View Cart
+            </button>
+        </div>
     </div>
     
     <!-- Toast Notification -->
@@ -1949,13 +2591,201 @@
             'cola': { name: 'Cola Drink', price: 3000, quantity: 1 }
         };
 
+        // Filter states
+        let currentSort = 'rating';
+        let showPromotionsOnly = false;
+        let selectedFoodTypes = [];
+
+        // Food items database (for food listing page)
+        const foodItems = [
+            { id: 1, name: 'Margherita Pizza', restaurant: 'Pizza Palace', price: 13500, originalPrice: 18000, discount: 10, image: 'pizza' },
+            { id: 2, name: 'Chicken Burger', restaurant: 'Burger House', price: 12000, originalPrice: 15000, discount: 20, image: 'burger' },
+            { id: 3, name: 'Pepperoni Pizza', restaurant: 'Urban Pizza', price: 24000, originalPrice: 28000, discount: 15, image: 'pizza' },
+            { id: 4, name: 'Caesar Salad', restaurant: 'Healthy Eats', price: 8000, originalPrice: 10000, discount: 20, image: 'salad' },
+            { id: 5, name: 'Chicken Alfredo Pasta', restaurant: 'Italian Bistro', price: 18000, originalPrice: 22000, discount: 18, image: 'pasta' },
+            { id: 6, name: 'Beef Tacos', restaurant: 'Taco Express', price: 10000, originalPrice: 12000, discount: 15, image: 'taco' },
+            { id: 7, name: 'Sushi Platter', restaurant: 'Sushi Bar', price: 32000, originalPrice: 40000, discount: 20, image: 'sushi' },
+            { id: 8, name: 'Grilled Chicken', restaurant: 'Chicken Tonight', price: 22000, originalPrice: 25000, discount: 12, image: 'chicken' }
+        ];
+
         // Initialize on page load
         document.addEventListener('DOMContentLoaded', function() {
             initializeBudgetSlider();
             initializeBudgetInputs();
             filterRestaurants();
             updateCartDisplay();
+            initializeFilters();
+            initializePaymentOptions();
         });
+
+        // Initialize filter functionality
+        function initializeFilters() {
+            // Sort dropdown
+            const sortChip = document.getElementById('sortChip');
+            const sortMenu = document.getElementById('sortMenu');
+            
+            if (sortChip && sortMenu) {
+                sortChip.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    sortMenu.classList.toggle('active');
+                });
+
+                document.addEventListener('click', () => {
+                    sortMenu.classList.remove('active');
+                });
+
+                document.querySelectorAll('.sort-option').forEach(option => {
+                    option.addEventListener('click', function() {
+                        document.querySelectorAll('.sort-option').forEach(o => o.classList.remove('selected'));
+                        this.classList.add('selected');
+                        currentSort = this.getAttribute('data-sort');
+                        sortRestaurants();
+                        
+                        // Update chip text
+                        const chipText = sortChip.childNodes[2];
+                        chipText.textContent = ' ' + this.textContent.trim() + ' ';
+                    });
+                });
+            }
+
+            // Promotions filter
+            const promotionsFilter = document.getElementById('promotionsFilter');
+            if (promotionsFilter) {
+                promotionsFilter.addEventListener('click', function() {
+                    this.classList.toggle('active');
+                    showPromotionsOnly = this.classList.contains('active');
+                    filterRestaurants();
+                });
+            }
+
+            // Food type filter (simple implementation)
+            const foodTypeFilter = document.getElementById('foodTypeFilter');
+            if (foodTypeFilter) {
+                foodTypeFilter.addEventListener('click', function() {
+                    showToast('Food type filtering coming soon!');
+                });
+            }
+        }
+
+        // Initialize payment options
+        function initializePaymentOptions() {
+            document.querySelectorAll('.payment-option').forEach(option => {
+                option.addEventListener('click', function() {
+                    document.querySelectorAll('.payment-option').forEach(o => o.classList.remove('selected'));
+                    this.classList.add('selected');
+                    this.querySelector('input[type="radio"]').checked = true;
+                });
+            });
+        }
+
+        // Sort restaurants
+        function sortRestaurants() {
+            const restaurantList = document.getElementById('restaurantList');
+            const restaurants = Array.from(document.querySelectorAll('.restaurant-card'));
+            
+            restaurants.sort((a, b) => {
+                const priceA = parseInt(a.getAttribute('data-avg-price'));
+                const priceB = parseInt(b.getAttribute('data-avg-price'));
+                
+                // For demo purposes, using price as proxy for other sorts
+                switch(currentSort) {
+                    case 'rating':
+                        return priceB - priceA; // Higher price = higher quality (demo)
+                    case 'delivery':
+                        return priceA - priceB; // Lower price = closer (demo)
+                    case 'price-low':
+                        return priceA - priceB;
+                    case 'price-high':
+                        return priceB - priceA;
+                    default:
+                        return 0;
+                }
+            });
+            
+            restaurants.forEach(card => restaurantList.appendChild(card));
+            showToast('Sorted by ' + document.querySelector('.sort-option.selected').textContent);
+        }
+
+        // Tab switching
+        function switchTab(tab) {
+            document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
+            
+            if (tab === 'home') {
+                document.querySelectorAll('.nav-item')[0].classList.add('active');
+                hideCart();
+                hideProfile();
+                hideFoodItems();
+                hideRestaurantDetail();
+            }
+        }
+
+        // Profile page functions
+        function showProfile() {
+            document.getElementById('profilePage').style.display = 'block';
+            document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
+            document.querySelectorAll('.nav-item')[2].classList.add('active');
+        }
+
+        function hideProfile() {
+            document.getElementById('profilePage').style.display = 'none';
+        }
+
+        // Food items page functions
+        function showFoodItems() {
+            const page = document.getElementById('foodItemsPage');
+            const grid = document.getElementById('foodItemsGrid');
+            const title = document.getElementById('foodItemsTitle');
+            
+            title.textContent = `Food Listing Between ${formatCurrency(currentMinBudget)} - ${formatCurrency(currentMaxBudget)}`;
+            
+            // Filter food items by budget
+            const filteredItems = foodItems.filter(item => 
+                item.price >= currentMinBudget && item.price <= currentMaxBudget
+            );
+            
+            // Clear and populate grid
+            grid.innerHTML = '';
+            filteredItems.forEach(item => {
+                const itemDiv = document.createElement('div');
+                itemDiv.className = 'food-item-card';
+                itemDiv.innerHTML = `
+                    <div class="food-item-image">${item.name.toUpperCase()}</div>
+                    <div class="food-item-info">
+                        <div class="food-item-restaurant">${item.restaurant}</div>
+                        <div class="food-item-name">${item.name}</div>
+                        <div class="food-item-price">
+                            ${item.discount ? `<span style="text-decoration: line-through; color: var(--gray); font-size: 11px; display: block; margin-bottom: 3px;">${formatCurrency(item.originalPrice)}</span>` : ''}
+                            ${formatCurrency(item.price)}
+                            ${item.discount ? `<span style="color: var(--secondary); font-size: 11px; margin-left: 5px;">${item.discount}% OFF</span>` : ''}
+                        </div>
+                        <button class="food-item-btn" onclick="addToCartFromFoodList('${item.name}', ${item.price}, 'food_${item.id}')">
+                            Add to Cart
+                        </button>
+                    </div>
+                `;
+                grid.appendChild(itemDiv);
+            });
+            
+            if (filteredItems.length === 0) {
+                grid.innerHTML = `
+                    <div style="grid-column: 1/-1; text-align: center; padding: 40px 20px; color: var(--gray);">
+                        <i class="fas fa-search" style="font-size: 48px; margin-bottom: 15px; display: block;"></i>
+                        <h3>No food items found</h3>
+                        <p>Try adjusting your budget range</p>
+                    </div>
+                `;
+            }
+            
+            page.style.display = 'block';
+        }
+
+        function hideFoodItems() {
+            document.getElementById('foodItemsPage').style.display = 'none';
+        }
+
+        function addToCartFromFoodList(name, price, id) {
+            addToCart(name, price, id);
+        }
 
         // Budget Slider Functions
         function initializeBudgetSlider() {
@@ -2110,9 +2940,17 @@
 
             restaurants.forEach((card, index) => {
                 const avgPrice = parseInt(card.getAttribute('data-avg-price'));
+                const hasDiscount = card.querySelector('.discount-tag') !== null;
+                
+                let shouldShow = avgPrice >= currentMinBudget && avgPrice <= currentMaxBudget;
+                
+                // Apply promotions filter
+                if (showPromotionsOnly && !hasDiscount) {
+                    shouldShow = false;
+                }
                 
                 setTimeout(() => {
-                    if (avgPrice >= currentMinBudget && avgPrice <= currentMaxBudget) {
+                    if (shouldShow) {
                         card.classList.remove('hidden');
                         card.style.animationDelay = (index * 0.1) + 's';
                         visibleCount++;
@@ -2126,7 +2964,7 @@
             const budgetAlertText = document.getElementById('budgetAlertText');
             budgetAlertText.textContent = `${formatCurrency(currentMinBudget)} - ${formatCurrency(currentMaxBudget)}`;
 
-            // Show/hide empty state (you can add this if needed)
+            // Show/hide empty state
             setTimeout(() => {
                 if (visibleCount === 0) {
                     showEmptyState();
@@ -2259,15 +3097,23 @@
             for (let itemId in cart) {
                 totalItems += cart[itemId].quantity;
             }
-            const cartCountElement = document.querySelector('.cart-count');
-            if (cartCountElement) {
-                cartCountElement.textContent = totalItems;
+            
+            // Update nav badge
+            const navBadge = document.getElementById('navCartBadge');
+            if (navBadge) {
+                navBadge.textContent = totalItems;
                 
-                // Animate cart count
-                cartCountElement.style.transform = 'scale(1.3)';
+                // Animate badge
+                navBadge.style.transform = 'scale(1.3)';
                 setTimeout(() => {
-                    cartCountElement.style.transform = 'scale(1)';
+                    navBadge.style.transform = 'scale(1)';
                 }, 200);
+            }
+            
+            // Update restaurant footer counter
+            const restaurantCounter = document.getElementById('restaurantCartCount');
+            if (restaurantCounter) {
+                restaurantCounter.textContent = totalItems;
             }
         }
         
