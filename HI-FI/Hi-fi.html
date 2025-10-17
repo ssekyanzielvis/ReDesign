@@ -128,9 +128,23 @@
 
         /* Search Bar */
         .search-bar {
-            padding: 15px 20px;
-            background-color: white;
-            border-bottom: 1px solid var(--border);
+            padding: 20px 20px;
+            background: linear-gradient(135deg, rgba(0, 188, 212, 0.03), rgba(0, 150, 136, 0.03));
+            border-bottom: 2px solid var(--primary);
+        }
+
+        .search-bar-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 12px;
+            font-weight: 700;
+            color: var(--primary);
+            font-size: 16px;
+        }
+
+        .search-bar-header i {
+            font-size: 20px;
         }
 
         .search-container {
@@ -141,26 +155,72 @@
 
         .search-icon {
             position: absolute;
-            left: 15px;
-            color: var(--gray);
-            font-size: 18px;
+            left: 18px;
+            color: var(--primary);
+            font-size: 20px;
+            font-weight: bold;
         }
 
         .search-input {
             width: 100%;
-            padding: 14px 20px 14px 50px;
-            border: 1px solid var(--border);
+            padding: 16px 20px 16px 55px;
+            border: 3px solid var(--primary);
             border-radius: 50px;
-            font-size: 16px;
-            background-color: var(--light);
+            font-size: 17px;
+            background-color: white;
             transition: var(--transition);
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        .search-input::placeholder {
+            color: #999;
+            font-weight: 500;
         }
 
         .search-input:focus {
             outline: none;
-            border-color: var(--primary);
+            border-color: var(--primary-dark);
             background-color: white;
-            box-shadow: 0 0 0 3px rgba(0, 160, 130, 0.2);
+            box-shadow: 0 0 0 4px rgba(0, 188, 212, 0.15), 0 4px 12px rgba(0, 188, 212, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .quick-filters {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+            overflow-x: auto;
+            scrollbar-width: none;
+        }
+
+        .quick-filters::-webkit-scrollbar {
+            display: none;
+        }
+
+        .quick-filter-btn {
+            padding: 8px 16px;
+            background: white;
+            border: 2px solid var(--primary);
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--primary);
+            cursor: pointer;
+            white-space: nowrap;
+            transition: var(--transition);
+        }
+
+        .quick-filter-btn:hover,
+        .quick-filter-btn.active {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 188, 212, 0.3);
+        }
+
+        .quick-filter-btn i {
+            margin-right: 5px;
         }
 
         /* Deals Section */
@@ -334,23 +394,216 @@
             font-size: 12px;
         }
 
+        .filter-chip .fa-chevron-down {
+            transition: transform 0.3s ease;
+        }
+
+        .filter-chip.expanded .fa-chevron-down {
+            transform: rotate(180deg);
+        }
+
+        /* Food Type Dropdown */
+        .food-type-dropdown {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 9999;
+            display: none;
+            align-items: flex-end;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .food-type-dropdown.show {
+            display: flex;
+        }
+
+        .food-type-modal {
+            background: white;
+            width: 100%;
+            max-height: 70vh;
+            border-radius: 20px 20px 0 0;
+            padding: 24px;
+            animation: slideUp 0.3s ease;
+            overflow-y: auto;
+        }
+
+        .food-type-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .food-type-header h3 {
+            font-size: 20px;
+            font-weight: 700;
+            margin: 0;
+            color: var(--text-dark);
+        }
+
+        .close-modal-btn {
+            background: none;
+            border: none;
+            font-size: 24px;
+            color: var(--text-light);
+            cursor: pointer;
+            padding: 0;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: var(--transition);
+        }
+
+        .close-modal-btn:hover {
+            background-color: var(--background);
+            color: var(--text-dark);
+        }
+
+        .food-type-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .food-type-option {
+            display: flex;
+            align-items: center;
+            padding: 14px 16px;
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: var(--transition);
+            background-color: white;
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--text-dark);
+        }
+
+        .food-type-option:hover {
+            border-color: var(--primary);
+            background-color: rgba(0, 160, 130, 0.05);
+        }
+
+        .food-type-option.selected {
+            border-color: var(--primary);
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .food-type-option i {
+            margin-right: 10px;
+            font-size: 18px;
+        }
+
+        .food-type-actions {
+            display: flex;
+            gap: 12px;
+            padding-top: 16px;
+            border-top: 1px solid var(--border);
+        }
+
+        .food-type-actions button {
+            flex: 1;
+            padding: 14px;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 15px;
+            cursor: pointer;
+            transition: var(--transition);
+            border: none;
+        }
+
+        .clear-filter-btn {
+            background-color: var(--background);
+            color: var(--text-dark);
+        }
+
+        .clear-filter-btn:hover {
+            background-color: var(--border);
+        }
+
+        .apply-filter-btn {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .apply-filter-btn:hover {
+            background-color: #00b894;
+            transform: translateY(-1px);
+        }
+
+        .apply-filter-btn:disabled {
+            background-color: var(--border);
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        @keyframes slideUp {
+            from {
+                transform: translateY(100%);
+            }
+            to {
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
         .sort-dropdown {
             position: relative;
+        }
+
+        .sort-dropdown .fa-chevron-down {
+            transition: transform 0.3s ease;
+            font-size: 10px;
+            margin-left: 4px;
+        }
+
+        .sort-dropdown.active .fa-chevron-down {
+            transform: rotate(180deg);
         }
 
         .sort-menu {
             position: absolute;
             top: 100%;
-            right: 0;
+            left: 0;
             margin-top: 8px;
             background: white;
-            border: 1px solid var(--border);
-            border-radius: var(--radius);
-            box-shadow: var(--shadow);
+            border: 2px solid var(--primary);
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
             padding: 8px 0;
-            min-width: 200px;
+            min-width: 220px;
             display: none;
-            z-index: 100;
+            z-index: 1000;
+            animation: slideDown 0.3s ease;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .sort-menu.active {
@@ -358,26 +611,32 @@
         }
 
         .sort-option {
-            padding: 12px 20px;
+            padding: 14px 20px;
             cursor: pointer;
-            transition: var(--transition);
+            transition: all 0.2s ease;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
+            font-size: 14px;
+            color: var(--text-dark);
         }
 
         .sort-option:hover {
-            background-color: var(--light);
+            background-color: rgba(0, 160, 130, 0.08);
+            padding-left: 24px;
         }
 
         .sort-option.selected {
-            background-color: rgba(0, 160, 130, 0.1);
+            background-color: rgba(0, 160, 130, 0.12);
             color: var(--primary);
             font-weight: 600;
+            border-left: 4px solid var(--primary);
         }
 
         .sort-option i {
-            font-size: 14px;
+            font-size: 16px;
+            width: 20px;
+            text-align: center;
         }
 
         .budget-filter {
@@ -481,6 +740,11 @@
         .budget-inputs {
             display: flex;
             gap: 15px;
+            padding: 15px;
+            background: linear-gradient(135deg, rgba(0, 188, 212, 0.05), rgba(0, 150, 136, 0.05));
+            border-radius: 12px;
+            border: 2px solid var(--primary);
+            margin-top: 10px;
         }
 
         .budget-input-container {
@@ -488,31 +752,58 @@
             position: relative;
         }
 
+        .budget-input-label {
+            display: block;
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 6px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
         .budget-input {
             width: 100%;
-            padding: 12px 15px 12px 40px;
-            border: 2px solid var(--border);
+            padding: 14px 15px 14px 42px;
+            border: 2px solid var(--primary);
             border-radius: var(--radius);
-            font-size: 16px;
-            background-color: var(--light);
+            font-size: 17px;
+            background-color: white;
             transition: var(--transition);
-            font-weight: 600;
+            font-weight: 700;
+            color: var(--dark);
         }
 
         .budget-input:focus {
             outline: none;
-            border-color: var(--primary);
+            border-color: var(--primary-dark);
             background-color: white;
-            box-shadow: 0 0 0 3px rgba(0, 160, 130, 0.2);
+            box-shadow: 0 0 0 4px rgba(0, 188, 212, 0.2);
+            transform: translateY(-2px);
         }
 
         .budget-icon {
             position: absolute;
             left: 15px;
-            top: 50%;
-            transform: translateY(-50%);
+            bottom: 16px;
             color: var(--primary);
             font-weight: bold;
+            font-size: 18px;
+        }
+
+        .budget-range-display {
+            text-align: center;
+            margin-top: 10px;
+            padding: 10px;
+            background: var(--primary);
+            color: white;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 15px;
+        }
+
+        .budget-range-display i {
+            margin: 0 5px;
         }
 
         /* Cost Preview Tooltip */
@@ -521,16 +812,16 @@
             bottom: 110%;
             left: 50%;
             transform: translateX(-50%) scale(0.9);
-            background-color: white;
-            border: 2px solid var(--primary);
-            padding: 12px 15px;
-            border-radius: var(--radius);
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+            background: linear-gradient(135deg, #ffffff, #f8f9fa);
+            border: 3px solid var(--primary);
+            padding: 16px 18px;
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(0, 188, 212, 0.25);
             opacity: 0;
             pointer-events: none;
             transition: all 0.3s ease;
             z-index: 100;
-            min-width: 200px;
+            min-width: 240px;
             max-width: 90vw;
             white-space: nowrap;
         }
@@ -542,39 +833,73 @@
             }
         }
 
+        .cost-preview-tooltip::before {
+            content: '💰 COST BREAKDOWN';
+            display: block;
+            font-size: 11px;
+            font-weight: 800;
+            color: var(--primary);
+            letter-spacing: 0.5px;
+            margin-bottom: 10px;
+            text-align: center;
+            padding-bottom: 8px;
+            border-bottom: 2px dashed var(--primary);
+        }
+
         .cost-preview-tooltip::after {
             content: '';
             position: absolute;
             top: 100%;
             left: 50%;
             transform: translateX(-50%);
-            border: 8px solid transparent;
+            border: 10px solid transparent;
             border-top-color: var(--primary);
         }
 
         .tooltip-line {
             display: flex;
             justify-content: space-between;
-            margin: 5px 0;
-            font-size: 13px;
+            margin: 8px 0;
+            font-size: 14px;
+            align-items: center;
         }
 
         .tooltip-line.total {
-            margin-top: 8px;
-            padding-top: 8px;
-            border-top: 1px solid var(--border);
-            font-weight: 700;
-            font-size: 14px;
-            color: var(--primary);
+            margin-top: 12px;
+            padding-top: 12px;
+            border-top: 2px solid var(--primary);
+            font-weight: 800;
+            font-size: 16px;
+            color: white;
+            background: var(--primary);
+            margin-left: -18px;
+            margin-right: -18px;
+            padding-left: 18px;
+            padding-right: 18px;
+            padding-bottom: 12px;
+            margin-bottom: -16px;
+            border-radius: 0 0 9px 9px;
         }
 
         .tooltip-label {
             color: var(--gray);
+            font-weight: 600;
+        }
+
+        .tooltip-label i {
+            margin-right: 6px;
+            color: var(--primary);
         }
 
         .tooltip-value {
-            font-weight: 600;
+            font-weight: 700;
             color: var(--dark);
+            font-size: 15px;
+        }
+
+        .tooltip-line.total .tooltip-label,
+        .tooltip-line.total .tooltip-value {
+            color: white;
         }
 
         /* Restaurant List */
@@ -639,6 +964,28 @@
             font-size: 12px;
             text-align: center;
             flex-shrink: 0;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .restaurant-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: var(--radius);
+        }
+
+        .restaurant-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.3) 100%);
+            z-index: 1;
         }
 
         .restaurant-info {
@@ -676,23 +1023,55 @@
         }
 
         .discount-tag {
-            display: inline-block;
-            background-color: var(--secondary);
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: linear-gradient(135deg, #FF4444, #FF6B6B);
             color: white;
-            padding: 4px 10px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: 600;
+            padding: 8px 16px;
+            border-radius: 25px;
+            font-size: 14px;
+            font-weight: 800;
+            box-shadow: 0 4px 12px rgba(255, 68, 68, 0.4);
+            animation: pulseBadge 2s ease-in-out infinite;
+            border: 2px solid white;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .discount-tag::before {
+            content: '🎉';
+            font-size: 16px;
+        }
+
+        @keyframes pulseBadge {
+            0%, 100% {
+                transform: scale(1);
+                box-shadow: 0 4px 12px rgba(255, 68, 68, 0.4);
+            }
+            50% {
+                transform: scale(1.05);
+                box-shadow: 0 6px 16px rgba(255, 68, 68, 0.6);
+            }
         }
 
         .delivery-tag {
-            display: inline-block;
-            background-color: var(--accent);
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: linear-gradient(135deg, var(--accent), #FFA726);
             color: white;
-            padding: 4px 10px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: 600;
+            padding: 8px 16px;
+            border-radius: 25px;
+            font-size: 13px;
+            font-weight: 700;
+            box-shadow: 0 4px 12px rgba(255, 152, 0, 0.3);
+            border: 2px solid white;
+        }
+
+        .delivery-tag::before {
+            content: '🏍️';
+            font-size: 14px;
         }
 
         .rating {
@@ -1328,6 +1707,10 @@
                 font-size: 10px;
             }
 
+            .restaurant-image img {
+                border-radius: 8px;
+            }
+
             .restaurant-name {
                 font-size: 16px;
             }
@@ -1381,6 +1764,27 @@
                 font-size: 13px;
             }
 
+            .menu-item-rating {
+                font-size: 13px;
+            }
+
+            .menu-item-rating .rating-count {
+                display: none;
+            }
+
+            .menu-items-grid {
+                grid-template-columns: 1fr;
+                gap: 16px;
+            }
+
+            .menu-item {
+                min-height: 400px;
+            }
+
+            .menu-item-image {
+                height: 220px;
+            }
+
             .checkout-btn {
                 font-size: 16px;
                 padding: 16px;
@@ -1429,6 +1833,10 @@
                 width: 60px;
                 height: 60px;
                 font-size: 9px;
+            }
+
+            .restaurant-image img {
+                border-radius: 6px;
             }
 
             .section-title {
@@ -1510,6 +1918,23 @@
             .food-items-grid {
                 grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
             }
+
+            /* Food type modal improvements for tablets/desktop */
+            .food-type-dropdown {
+                align-items: center;
+                justify-content: center;
+            }
+
+            .food-type-modal {
+                max-width: 600px;
+                border-radius: 20px;
+                max-height: 80vh;
+            }
+
+            .food-type-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 16px;
+            }
         }
 
         @media (min-width: 1024px) {
@@ -1523,6 +1948,10 @@
 
             .bottom-nav {
                 max-width: 1200px;
+            }
+
+            .food-type-grid {
+                grid-template-columns: repeat(4, 1fr);
             }
         }
 
@@ -1657,6 +2086,12 @@
             margin-bottom: 30px;
         }
 
+        .menu-items-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
         .category-title {
             font-weight: 700;
             font-size: 20px;
@@ -1668,73 +2103,122 @@
 
         .menu-item {
             display: flex;
-            justify-content: space-between;
-            padding: 15px 0;
-            border-bottom: 1px solid var(--border);
-            align-items: flex-start;
+            flex-direction: column;
+            padding: 0;
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            background: white;
+            transition: var(--transition);
+            overflow: hidden;
+            min-height: 340px;
         }
 
-        .menu-item:last-child {
-            border-bottom: none;
+        .menu-item:hover {
+            box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+            transform: translateY(-4px);
         }
 
         .menu-item-info {
             flex: 1;
-            padding-right: 15px;
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
         }
 
         .menu-item-name {
             font-weight: 600;
-            margin-bottom: 5px;
+            margin-bottom: 6px;
             font-size: 17px;
             word-wrap: break-word;
             line-height: 1.4;
+            color: var(--dark);
         }
 
         .menu-item-desc {
             font-size: 14px;
             color: var(--gray);
-            margin-bottom: 8px;
+            margin-bottom: 12px;
             line-height: 1.5;
             word-wrap: break-word;
+            flex: 1;
         }
 
         .menu-item-price {
             font-weight: 700;
-            color: var(--dark);
+            color: var(--primary);
             font-size: 18px;
+            margin-bottom: 12px;
+        }
+
+        .menu-item-rating {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        .menu-item-rating .stars {
+            color: #FFB800;
+            display: flex;
+            gap: 2px;
+        }
+
+        .menu-item-rating .rating-text {
+            color: var(--dark);
+            font-weight: 600;
+        }
+
+        .menu-item-rating .rating-count {
+            color: var(--gray);
+            font-size: 13px;
         }
 
         .menu-item-image {
-            width: 80px;
-            height: 80px;
-            border-radius: var(--radius);
-            background: linear-gradient(135deg, #FF9A8B, #FF6A88);
+            width: 100%;
+            height: 200px;
+            border-radius: 0;
+            background: #f5f5f5;
             flex-shrink: 0;
+            overflow: hidden;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
-        .menu-item-image:nth-child(2n) {
-            background: linear-gradient(135deg, #42E695, #3BB2B8);
+        .menu-item-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+            display: block;
+        }
+        
+        .menu-item:hover .menu-item-image img {
+            transform: scale(1.05);
         }
 
         .add-to-cart-btn {
             background: linear-gradient(135deg, var(--primary), var(--primary-dark));
             color: white;
             border: none;
-            padding: 10px 18px;
-            border-radius: var(--radius);
+            padding: 12px 20px;
+            border-radius: 10px;
             font-weight: 600;
             cursor: pointer;
             transition: var(--transition);
-            margin-top: 10px;
             display: flex;
             align-items: center;
+            justify-content: center;
             gap: 8px;
+            font-size: 15px;
+            width: 100%;
         }
 
         .add-to-cart-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+            box-shadow: 0 4px 12px rgba(0, 188, 212, 0.3);
         }
 
         /* Toast Notification */
@@ -1803,6 +2287,122 @@
             color: #D68910;
         }
 
+        /* Budget Warning */
+        .budget-warning {
+            background: linear-gradient(135deg, #FFE5E5, #FFD0D0);
+            border: 2px solid var(--secondary);
+            color: #721c24;
+            padding: 14px 15px;
+            border-radius: var(--radius);
+            margin: 0 20px 15px;
+            display: none;
+            align-items: center;
+            gap: 12px;
+            font-size: 14px;
+            box-shadow: 0 2px 8px rgba(255, 59, 48, 0.2);
+            animation: slideDown 0.4s ease;
+        }
+
+        .budget-warning.show {
+            display: flex;
+        }
+
+        .budget-warning i {
+            color: var(--secondary);
+            font-size: 18px;
+        }
+
+        .budget-warning strong {
+            color: var(--secondary);
+        }
+
+        /* Success Message */
+        .success-message {
+            background: linear-gradient(135deg, #E8F5E9, #C8E6C9);
+            border: 2px solid #4CAF50;
+            color: #2E7D32;
+            padding: 14px 15px;
+            border-radius: var(--radius);
+            margin: 0 20px 15px;
+            display: none;
+            align-items: center;
+            gap: 12px;
+            font-size: 14px;
+            box-shadow: 0 2px 8px rgba(76, 175, 80, 0.2);
+            animation: slideDown 0.4s ease;
+        }
+
+        .success-message.show {
+            display: flex;
+        }
+
+        .success-message i {
+            color: #4CAF50;
+            font-size: 18px;
+        }
+
+        /* Loading Overlay */
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .loading-overlay.show {
+            display: flex;
+        }
+
+        .loading-overlay .loading-spinner {
+            width: 60px;
+            height: 60px;
+            border: 5px solid var(--light-gray);
+            border-top-color: var(--primary);
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+
+        .loading-overlay p {
+            font-size: 16px;
+            color: var(--gray);
+            font-weight: 600;
+        }
+
+        /* Screen reader only */
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border-width: 0;
+        }
+
+        /* Focus visible for better accessibility */
+        *:focus-visible {
+            outline: 3px solid var(--primary);
+            outline-offset: 2px;
+            border-radius: 4px;
+        }
+
+        button:focus-visible,
+        .filter-chip:focus-visible,
+        .nav-item:focus-visible {
+            outline: 3px solid var(--primary);
+            outline-offset: 2px;
+        }
+
         /* Empty State */
         .empty-state {
             text-align: center;
@@ -1850,77 +2450,190 @@
 </head>
 <body>
     <!-- Main App Container -->
-    <div class="container">
+    <div class="container" role="main" aria-label="Food Delivery Application">
         <!-- Header -->
-        <header>
+        <header role="banner">
             <div class="header-content">
-                <div class="logo">
-                    <i class="fas fa-bolt"></i>
+                <div class="logo" role="heading" aria-level="1">
+                    <i class="fas fa-bolt" aria-hidden="true"></i>
                     GLOVO
                 </div>
-                <div class="nav-icons">
-                    <div class="nav-icon"><i class="far fa-heart"></i></div>
-                    <div class="nav-icon"><i class="far fa-bell"></i></div>
-                    <div class="nav-icon"><i class="far fa-user"></i></div>
-                </div>
+                <nav class="nav-icons" aria-label="User actions">
+                    <button class="nav-icon" aria-label="Favorites" title="View favorites">
+                        <i class="far fa-heart" aria-hidden="true"></i>
+                    </button>
+                    <button class="nav-icon" aria-label="Notifications" title="View notifications">
+                        <i class="far fa-bell" aria-hidden="true"></i>
+                    </button>
+                    <button class="nav-icon" aria-label="User profile" title="View profile" onclick="showProfile()">
+                        <i class="far fa-user" aria-hidden="true"></i>
+                    </button>
+                </nav>
             </div>
         </header>
         
         <!-- Location Bar -->
-        <div class="location-bar">
-            <i class="fas fa-map-marker-alt"></i>
+        <div class="location-bar" role="region" aria-label="Delivery location">
+            <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
             <span>Delivering to: <strong>Makerere University, Kampala</strong></span>
-            <i class="fas fa-chevron-down" style="margin-left: auto;"></i>
+            <i class="fas fa-chevron-down" style="margin-left: auto;" aria-hidden="true"></i>
         </div>
         
         <!-- Search Bar -->
-        <div class="search-bar">
+        <div class="search-bar" role="search">
+            <div class="search-bar-header">
+                <i class="fas fa-search"></i>
+                <span>Quick Search & Discover</span>
+            </div>
             <div class="search-container">
-                <i class="fas fa-search search-icon"></i>
-                <input type="text" class="search-input" placeholder="Search for restaurants or food...">
+                <i class="fas fa-search search-icon" aria-hidden="true"></i>
+                <input type="text" class="search-input" id="searchInput" 
+                       placeholder="🍕 Search restaurants, cuisine, or dishes..." 
+                       aria-label="Search for restaurants or food"
+                       autocomplete="off">
+            </div>
+            <div class="quick-filters">
+                <button class="quick-filter-btn" onclick="filterByType('burger')">
+                    <i class="fas fa-hamburger"></i>Burgers
+                </button>
+                <button class="quick-filter-btn" onclick="filterByType('pizza')">
+                    <i class="fas fa-pizza-slice"></i>Pizza
+                </button>
+                <button class="quick-filter-btn" onclick="filterByType('healthy')">
+                    <i class="fas fa-leaf"></i>Healthy
+                </button>
+                <button class="quick-filter-btn" onclick="filterByType('fastfood')">
+                    <i class="fas fa-drumstick-bite"></i>Fast Food
+                </button>
+                <button class="quick-filter-btn" onclick="filterByType('dessert')">
+                    <i class="fas fa-ice-cream"></i>Desserts
+                </button>
+                <button class="quick-filter-btn" onclick="showAllRestaurants()">
+                    <i class="fas fa-th"></i>View All
+                </button>
             </div>
         </div>
         
         <!-- Filters Row -->
-        <div class="filters-row">
-            <div class="filter-chip sort-dropdown" id="sortChip">
-                <i class="fas fa-sort-amount-down"></i>
+        <div class="filters-row" role="toolbar" aria-label="Filter and sort options">
+            <div class="filter-chip sort-dropdown" id="sortChip" role="button" tabindex="0" aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-sort-amount-down" aria-hidden="true"></i>
                 Top Rated
-                <i class="fas fa-chevron-down"></i>
-                <div class="sort-menu" id="sortMenu">
-                    <div class="sort-option selected" data-sort="rating">
-                        <i class="fas fa-star"></i>
+                <i class="fas fa-chevron-down" aria-hidden="true"></i>
+                <div class="sort-menu" id="sortMenu" role="menu">
+                    <div class="sort-option selected" data-sort="rating" role="menuitem" tabindex="0">
+                        <i class="fas fa-star" aria-hidden="true"></i>
                         Top Rated
                     </div>
-                    <div class="sort-option" data-sort="delivery">
-                        <i class="fas fa-clock"></i>
+                    <div class="sort-option" data-sort="delivery" role="menuitem" tabindex="0">
+                        <i class="fas fa-clock" aria-hidden="true"></i>
                         Fastest Delivery
                     </div>
-                    <div class="sort-option" data-sort="price-low">
-                        <i class="fas fa-arrow-down"></i>
+                    <div class="sort-option" data-sort="price-low" role="menuitem" tabindex="0">
+                        <i class="fas fa-arrow-down" aria-hidden="true"></i>
                         Price: Low to High
                     </div>
-                    <div class="sort-option" data-sort="price-high">
-                        <i class="fas fa-arrow-up"></i>
+                    <div class="sort-option" data-sort="price-high" role="menuitem" tabindex="0">
+                        <i class="fas fa-arrow-up" aria-hidden="true"></i>
                         Price: High to Low
                     </div>
                 </div>
             </div>
-            <div class="filter-chip" id="promotionsFilter">
-                <i class="fas fa-tags"></i>
+            <button class="filter-chip" id="promotionsFilter" aria-pressed="false" aria-label="Filter by promotions">
+                <i class="fas fa-tags" aria-hidden="true"></i>
                 Promotions
-            </div>
-            <div class="filter-chip" id="foodTypeFilter">
-                <i class="fas fa-utensils"></i>
+            </button>
+            <button class="filter-chip" id="foodTypeFilter" aria-label="Filter by food type" aria-expanded="false">
+                <i class="fas fa-utensils" aria-hidden="true"></i>
                 Food Type
-                <i class="fas fa-chevron-down"></i>
+                <i class="fas fa-chevron-down" aria-hidden="true"></i>
+            </button>
+        </div>
+
+        <!-- Food Type Dropdown Modal -->
+        <div class="food-type-dropdown" id="foodTypeDropdown" role="dialog" aria-labelledby="foodTypeModalTitle" aria-modal="true">
+            <div class="food-type-modal" role="document">
+                <div class="food-type-header">
+                    <h3 id="foodTypeModalTitle">Select Food Types</h3>
+                    <button class="close-modal-btn" id="closeFoodTypeModal" aria-label="Close food type filter">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                
+                <div class="food-type-grid" role="group" aria-label="Food type options">
+                    <div class="food-type-option" data-food-type="pizza" role="checkbox" aria-checked="false" tabindex="0">
+                        <i class="fas fa-pizza-slice"></i>
+                        Pizza
+                    </div>
+                    <div class="food-type-option" data-food-type="burger" role="checkbox" aria-checked="false" tabindex="0">
+                        <i class="fas fa-hamburger"></i>
+                        Burgers
+                    </div>
+                    <div class="food-type-option" data-food-type="sushi" role="checkbox" aria-checked="false" tabindex="0">
+                        <i class="fas fa-fish"></i>
+                        Sushi
+                    </div>
+                    <div class="food-type-option" data-food-type="indian" role="checkbox" aria-checked="false" tabindex="0">
+                        <i class="fas fa-pepper-hot"></i>
+                        Indian
+                    </div>
+                    <div class="food-type-option" data-food-type="chinese" role="checkbox" aria-checked="false" tabindex="0">
+                        <i class="fas fa-bowl-rice"></i>
+                        Chinese
+                    </div>
+                    <div class="food-type-option" data-food-type="italian" role="checkbox" aria-checked="false" tabindex="0">
+                        <i class="fas fa-plate-wheat"></i>
+                        Italian
+                    </div>
+                    <div class="food-type-option" data-food-type="mexican" role="checkbox" aria-checked="false" tabindex="0">
+                        <i class="fas fa-pepper-hot"></i>
+                        Mexican
+                    </div>
+                    <div class="food-type-option" data-food-type="dessert" role="checkbox" aria-checked="false" tabindex="0">
+                        <i class="fas fa-ice-cream"></i>
+                        Desserts
+                    </div>
+                    <div class="food-type-option" data-food-type="healthy" role="checkbox" aria-checked="false" tabindex="0">
+                        <i class="fas fa-leaf"></i>
+                        Healthy
+                    </div>
+                    <div class="food-type-option" data-food-type="fastfood" role="checkbox" aria-checked="false" tabindex="0">
+                        <i class="fas fa-burger"></i>
+                        Fast Food
+                    </div>
+                    <div class="food-type-option" data-food-type="vegetarian" role="checkbox" aria-checked="false" tabindex="0">
+                        <i class="fas fa-seedling"></i>
+                        Vegetarian
+                    </div>
+                    <div class="food-type-option" data-food-type="cafe" role="checkbox" aria-checked="false" tabindex="0">
+                        <i class="fas fa-mug-hot"></i>
+                        Café
+                    </div>
+                </div>
+
+                <div class="food-type-actions">
+                    <button class="clear-filter-btn" id="clearFoodTypes">Clear All</button>
+                    <button class="apply-filter-btn" id="applyFoodTypes">Apply Filters</button>
+                </div>
             </div>
         </div>
         
         <!-- Budget Alert -->
-        <div class="budget-alert" id="budgetAlert">
-            <i class="fas fa-info-circle"></i>
+        <div class="budget-alert" id="budgetAlert" role="status" aria-live="polite">
+            <i class="fas fa-info-circle" aria-hidden="true"></i>
             <div>You've set a budget of <strong id="budgetAlertText">15,000 - 35,000 UGX</strong>. We're showing restaurants within your range.</div>
+        </div>
+        
+        <!-- Budget Warning -->
+        <div class="budget-warning" id="budgetWarning" role="alert" aria-live="assertive">
+            <i class="fas fa-exclamation-triangle" aria-hidden="true"></i>
+            <div id="budgetWarningText">Your cart total exceeds your maximum budget!</div>
+        </div>
+        
+        <!-- Success Message -->
+        <div class="success-message" id="successMessage" role="status" aria-live="polite">
+            <i class="fas fa-check-circle" aria-hidden="true"></i>
+            <div id="successMessageText">Order placed successfully!</div>
         </div>
         
         <!-- Deals Section -->
@@ -1971,49 +2684,56 @@
                 </div>
                 <div class="budget-inputs">
                     <div class="budget-input-container">
+                        <label class="budget-input-label">Minimum Budget</label>
                         <i class="fas fa-wallet budget-icon"></i>
                         <input type="text" class="budget-input" value="15,000" id="minBudget" placeholder="Min">
                     </div>
                     <div class="budget-input-container">
+                        <label class="budget-input-label">Maximum Budget</label>
                         <i class="fas fa-wallet budget-icon"></i>
                         <input type="text" class="budget-input" value="35,000" id="maxBudget" placeholder="Max">
                     </div>
+                </div>
+                <div class="budget-range-display">
+                    <i class="fas fa-filter"></i> Active Budget Range: <span id="activeBudgetRange">15,000 - 35,000 UGX</span>
                 </div>
             </div>
         </div>
         
         <!-- Restaurant List -->
         <div class="section-title">
-            Restaurants Within Your Budget
+            <i class="fas fa-check-circle" style="color: var(--primary);"></i> Restaurants Within Your Budget
             <span class="see-all" onclick="showFoodItems()">View Food Items</span>
         </div>
         <div class="restaurant-list" id="restaurantList">
             <!-- Restaurant 1 -->
-            <div class="restaurant-card fade-in" data-avg-price="18000" onclick="showRestaurantDetail('Chicken Tonight')">
+            <div class="restaurant-card fade-in" data-avg-price="18000" data-food-types="fastfood,burger,healthy" onclick="showRestaurantDetail('Chicken Tonight')">
                 <div class="cost-preview-tooltip">
                     <div class="tooltip-line">
-                        <span class="tooltip-label">Avg. Meal:</span>
+                        <span class="tooltip-label"><i class="fas fa-utensils"></i>Avg. Meal:</span>
                         <span class="tooltip-value">18,000 UGX</span>
                     </div>
                     <div class="tooltip-line">
-                        <span class="tooltip-label">Delivery:</span>
-                        <span class="tooltip-value">0 UGX</span>
+                        <span class="tooltip-label"><i class="fas fa-motorcycle"></i>Delivery:</span>
+                        <span class="tooltip-value" style="color: var(--secondary);">FREE</span>
                     </div>
                     <div class="tooltip-line">
-                        <span class="tooltip-label">Service Fee:</span>
+                        <span class="tooltip-label"><i class="fas fa-receipt"></i>Service Fee:</span>
                         <span class="tooltip-value">1,500 UGX</span>
                     </div>
                     <div class="tooltip-line">
-                        <span class="tooltip-label">Discount (20%):</span>
-                        <span class="tooltip-value" style="color: var(--secondary);">-3,600 UGX</span>
+                        <span class="tooltip-label"><i class="fas fa-percent"></i>Discount (20%):</span>
+                        <span class="tooltip-value" style="color: var(--secondary); font-weight: 800;">-3,600 UGX</span>
                     </div>
                     <div class="tooltip-line total">
-                        <span>Est. Total:</span>
-                        <span>15,900 UGX</span>
+                        <span class="tooltip-label"><i class="fas fa-calculator"></i>TOTAL YOU PAY:</span>
+                        <span class="tooltip-value">15,900 UGX</span>
                     </div>
                 </div>
                 <div class="restaurant-header">
-                    <div class="restaurant-image">CHICKEN TONIGHT</div>
+                    <div class="restaurant-image">
+                        <img src="https://images.unsplash.com/photo-1626082927389-6cd097cdc6ec?w=200&h=200&fit=crop" alt="Grilled Chicken" loading="lazy">
+                    </div>
                     <div class="restaurant-info">
                         <div class="restaurant-name">Chicken Tonight</div>
                         <div class="restaurant-details">
@@ -2044,7 +2764,7 @@
             </div>
             
             <!-- Restaurant 2 -->
-            <div class="restaurant-card fade-in" data-avg-price="25000" onclick="showRestaurantDetail('Pizza Palace')">
+            <div class="restaurant-card fade-in" data-avg-price="25000" data-food-types="pizza,italian" onclick="showRestaurantDetail('Pizza Palace')">
                 <div class="cost-preview-tooltip">
                     <div class="tooltip-line">
                         <span class="tooltip-label">Avg. Meal:</span>
@@ -2068,7 +2788,9 @@
                     </div>
                 </div>
                 <div class="restaurant-header">
-                    <div class="restaurant-image">PIZZA PALACE</div>
+                    <div class="restaurant-image">
+                        <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?w=200&h=200&fit=crop" alt="Pizza" loading="lazy">
+                    </div>
                     <div class="restaurant-info">
                         <div class="restaurant-name">Pizza Palace</div>
                         <div class="restaurant-details">
@@ -2098,7 +2820,7 @@
             </div>
             
             <!-- Restaurant 3 -->
-            <div class="restaurant-card fade-in" data-avg-price="15000" onclick="showRestaurantDetail('Burger Hub')">
+            <div class="restaurant-card fade-in" data-avg-price="15000" data-food-types="burger,fastfood" onclick="showRestaurantDetail('Burger Hub')">
                 <div class="cost-preview-tooltip">
                     <div class="tooltip-line">
                         <span class="tooltip-label">Avg. Meal:</span>
@@ -2122,7 +2844,9 @@
                     </div>
                 </div>
                 <div class="restaurant-header">
-                    <div class="restaurant-image">BURGER HUB</div>
+                    <div class="restaurant-image">
+                        <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=200&h=200&fit=crop" alt="Burger" loading="lazy">
+                    </div>
                     <div class="restaurant-info">
                         <div class="restaurant-name">Burger Hub</div>
                         <div class="restaurant-details">
@@ -2153,7 +2877,7 @@
             </div>
 
             <!-- Restaurant 4 - Additional -->
-            <div class="restaurant-card fade-in" data-avg-price="32000" onclick="showRestaurantDetail('Sushi Bar')">
+            <div class="restaurant-card fade-in" data-avg-price="32000" data-food-types="sushi,healthy" onclick="showRestaurantDetail('Sushi Bar')">
                 <div class="cost-preview-tooltip">
                     <div class="tooltip-line">
                         <span class="tooltip-label">Avg. Meal:</span>
@@ -2173,7 +2897,9 @@
                     </div>
                 </div>
                 <div class="restaurant-header">
-                    <div class="restaurant-image">SUSHI BAR</div>
+                    <div class="restaurant-image">
+                        <img src="https://images.unsplash.com/photo-1579584425555-c3ce17fd4351?w=200&h=200&fit=crop" alt="Sushi" loading="lazy">
+                    </div>
                     <div class="restaurant-info">
                         <div class="restaurant-name">Sushi Bar</div>
                         <div class="restaurant-details">
@@ -2200,7 +2926,7 @@
             </div>
 
             <!-- Restaurant 5 - Additional -->
-            <div class="restaurant-card fade-in" data-avg-price="12000" onclick="showRestaurantDetail('Taco Express')">
+            <div class="restaurant-card fade-in" data-avg-price="12000" data-food-types="mexican,fastfood" onclick="showRestaurantDetail('Taco Express')">
                 <div class="cost-preview-tooltip">
                     <div class="tooltip-line">
                         <span class="tooltip-label">Avg. Meal:</span>
@@ -2224,7 +2950,9 @@
                     </div>
                 </div>
                 <div class="restaurant-header">
-                    <div class="restaurant-image">TACO EXPRESS</div>
+                    <div class="restaurant-image">
+                        <img src="https://images.unsplash.com/photo-1565299585323-38d6b0865b47?w=200&h=200&fit=crop" alt="Tacos" loading="lazy">
+                    </div>
                     <div class="restaurant-info">
                         <div class="restaurant-name">Taco Express</div>
                         <div class="restaurant-details">
@@ -2248,6 +2976,275 @@
                             </div>
                             <div class="rating-value">4.1</div>
                             <div class="rating-count">(156)</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Restaurant 6 - Indian Cuisine -->
+            <div class="restaurant-card fade-in" data-avg-price="22000" data-food-types="indian,vegetarian,healthy" onclick="showRestaurantDetail('Spice Garden')">
+                <div class="cost-preview-tooltip">
+                    <div class="tooltip-line">
+                        <span class="tooltip-label">Avg. Meal:</span>
+                        <span class="tooltip-value">22,000 UGX</span>
+                    </div>
+                    <div class="tooltip-line">
+                        <span class="tooltip-label">Delivery:</span>
+                        <span class="tooltip-value">3,000 UGX</span>
+                    </div>
+                    <div class="tooltip-line">
+                        <span class="tooltip-label">Service Fee:</span>
+                        <span class="tooltip-value">1,500 UGX</span>
+                    </div>
+                    <div class="tooltip-line total">
+                        <span>Est. Total:</span>
+                        <span>26,500 UGX</span>
+                    </div>
+                </div>
+                <div class="restaurant-header">
+                    <div class="restaurant-image">
+                        <img src="https://images.unsplash.com/photo-1585937421612-70a008356fbe?w=200&h=200&fit=crop" alt="Indian Curry" loading="lazy">
+                    </div>
+                    <div class="restaurant-info">
+                        <div class="restaurant-name">Spice Garden</div>
+                        <div class="restaurant-details">
+                            <i class="fas fa-utensils"></i> Indian • 
+                            <i class="fas fa-clock"></i> 25-35 min • 
+                            <i class="fas fa-map-marker-alt"></i> 3.5 km
+                        </div>
+                        <div class="restaurant-details">
+                            <i class="fas fa-tag"></i> Avg. price: <strong>22,000 UGX</strong>
+                        </div>
+                        <div class="restaurant-tags">
+                            <div class="delivery-tag">AUTHENTIC SPICES</div>
+                        </div>
+                        <div class="rating">
+                            <div class="stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                            <div class="rating-value">4.6</div>
+                            <div class="rating-count">(312)</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Restaurant 7 - Chinese -->
+            <div class="restaurant-card fade-in" data-avg-price="19000" data-food-types="chinese,healthy" onclick="showRestaurantDetail('Dragon Wok')">
+                <div class="cost-preview-tooltip">
+                    <div class="tooltip-line">
+                        <span class="tooltip-label">Avg. Meal:</span>
+                        <span class="tooltip-value">19,000 UGX</span>
+                    </div>
+                    <div class="tooltip-line">
+                        <span class="tooltip-label">Delivery:</span>
+                        <span class="tooltip-value">2,500 UGX</span>
+                    </div>
+                    <div class="tooltip-line">
+                        <span class="tooltip-label">Service Fee:</span>
+                        <span class="tooltip-value">1,500 UGX</span>
+                    </div>
+                    <div class="tooltip-line">
+                        <span class="tooltip-label">Discount (15%):</span>
+                        <span class="tooltip-value" style="color: var(--secondary);">-2,850 UGX</span>
+                    </div>
+                    <div class="tooltip-line total">
+                        <span>Est. Total:</span>
+                        <span>20,150 UGX</span>
+                    </div>
+                </div>
+                <div class="restaurant-header">
+                    <div class="restaurant-image">
+                        <img src="https://images.unsplash.com/photo-1525755662778-989d0524087e?w=200&h=200&fit=crop" alt="Chinese Noodles" loading="lazy">
+                    </div>
+                    <div class="restaurant-info">
+                        <div class="restaurant-name">Dragon Wok</div>
+                        <div class="restaurant-details">
+                            <i class="fas fa-utensils"></i> Chinese • 
+                            <i class="fas fa-clock"></i> 20-30 min • 
+                            <i class="fas fa-map-marker-alt"></i> 2.8 km
+                        </div>
+                        <div class="restaurant-details">
+                            <i class="fas fa-tag"></i> Avg. price: <strong>19,000 UGX</strong>
+                        </div>
+                        <div class="restaurant-tags">
+                            <div class="discount-tag">15% OFF</div>
+                        </div>
+                        <div class="rating">
+                            <div class="stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <div class="rating-value">4.7</div>
+                            <div class="rating-count">(423)</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Restaurant 8 - Desserts & Cafe -->
+            <div class="restaurant-card fade-in" data-avg-price="8000" data-food-types="dessert,cafe" onclick="showRestaurantDetail('Sweet Treats')">
+                <div class="cost-preview-tooltip">
+                    <div class="tooltip-line">
+                        <span class="tooltip-label">Avg. Meal:</span>
+                        <span class="tooltip-value">8,000 UGX</span>
+                    </div>
+                    <div class="tooltip-line">
+                        <span class="tooltip-label">Delivery:</span>
+                        <span class="tooltip-value">2,000 UGX</span>
+                    </div>
+                    <div class="tooltip-line">
+                        <span class="tooltip-label">Service Fee:</span>
+                        <span class="tooltip-value">1,500 UGX</span>
+                    </div>
+                    <div class="tooltip-line total">
+                        <span>Est. Total:</span>
+                        <span>11,500 UGX</span>
+                    </div>
+                </div>
+                <div class="restaurant-header">
+                    <div class="restaurant-image">
+                        <img src="https://images.unsplash.com/photo-1563805042-7684c019e1cb?w=200&h=200&fit=crop" alt="Desserts" loading="lazy">
+                    </div>
+                    <div class="restaurant-info">
+                        <div class="restaurant-name">Sweet Treats Café</div>
+                        <div class="restaurant-details">
+                            <i class="fas fa-utensils"></i> Desserts & Coffee • 
+                            <i class="fas fa-clock"></i> 10-15 min • 
+                            <i class="fas fa-map-marker-alt"></i> 1.2 km
+                        </div>
+                        <div class="restaurant-details">
+                            <i class="fas fa-tag"></i> Avg. price: <strong>8,000 UGX</strong>
+                        </div>
+                        <div class="restaurant-tags">
+                            <div class="delivery-tag">LOW DELIVERY FEE</div>
+                        </div>
+                        <div class="rating">
+                            <div class="stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                            <div class="rating-value">4.5</div>
+                            <div class="rating-count">(289)</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Restaurant 9 - Vegetarian -->
+            <div class="restaurant-card fade-in" data-avg-price="16000" data-food-types="vegetarian,healthy,cafe" onclick="showRestaurantDetail('Green Bowl')">
+                <div class="cost-preview-tooltip">
+                    <div class="tooltip-line">
+                        <span class="tooltip-label">Avg. Meal:</span>
+                        <span class="tooltip-value">16,000 UGX</span>
+                    </div>
+                    <div class="tooltip-line">
+                        <span class="tooltip-label">Delivery:</span>
+                        <span class="tooltip-value">0 UGX</span>
+                    </div>
+                    <div class="tooltip-line">
+                        <span class="tooltip-label">Service Fee:</span>
+                        <span class="tooltip-value">1,500 UGX</span>
+                    </div>
+                    <div class="tooltip-line">
+                        <span class="tooltip-label">Discount (20%):</span>
+                        <span class="tooltip-value" style="color: var(--secondary);">-3,200 UGX</span>
+                    </div>
+                    <div class="tooltip-line total">
+                        <span>Est. Total:</span>
+                        <span>14,300 UGX</span>
+                    </div>
+                </div>
+                <div class="restaurant-header">
+                    <div class="restaurant-image">
+                        <img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=200&h=200&fit=crop" alt="Healthy Salad Bowl" loading="lazy">
+                    </div>
+                    <div class="restaurant-info">
+                        <div class="restaurant-name">Green Bowl</div>
+                        <div class="restaurant-details">
+                            <i class="fas fa-utensils"></i> Vegetarian • 
+                            <i class="fas fa-clock"></i> 15-25 min • 
+                            <i class="fas fa-map-marker-alt"></i> 1.5 km
+                        </div>
+                        <div class="restaurant-details">
+                            <i class="fas fa-tag"></i> Avg. price: <strong>16,000 UGX</strong>
+                        </div>
+                        <div class="restaurant-tags">
+                            <div class="discount-tag">20% OFF</div>
+                            <div class="delivery-tag">FREE DELIVERY</div>
+                        </div>
+                        <div class="rating">
+                            <div class="stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <div class="rating-value">4.9</div>
+                            <div class="rating-count">(567)</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Restaurant 10 - Italian Pasta -->
+            <div class="restaurant-card fade-in" data-avg-price="28000" data-food-types="italian" onclick="showRestaurantDetail('Pasta Bella')">
+                <div class="cost-preview-tooltip">
+                    <div class="tooltip-line">
+                        <span class="tooltip-label">Avg. Meal:</span>
+                        <span class="tooltip-value">28,000 UGX</span>
+                    </div>
+                    <div class="tooltip-line">
+                        <span class="tooltip-label">Delivery:</span>
+                        <span class="tooltip-value">3,500 UGX</span>
+                    </div>
+                    <div class="tooltip-line">
+                        <span class="tooltip-label">Service Fee:</span>
+                        <span class="tooltip-value">1,500 UGX</span>
+                    </div>
+                    <div class="tooltip-line total">
+                        <span>Est. Total:</span>
+                        <span>33,000 UGX</span>
+                    </div>
+                </div>
+                <div class="restaurant-header">
+                    <div class="restaurant-image">
+                        <img src="https://images.unsplash.com/photo-1621996346565-e3dbc646d9a9?w=200&h=200&fit=crop" alt="Italian Pasta" loading="lazy">
+                    </div>
+                    <div class="restaurant-info">
+                        <div class="restaurant-name">Pasta Bella</div>
+                        <div class="restaurant-details">
+                            <i class="fas fa-utensils"></i> Italian Pasta • 
+                            <i class="fas fa-clock"></i> 25-35 min • 
+                            <i class="fas fa-map-marker-alt"></i> 4.2 km
+                        </div>
+                        <div class="restaurant-details">
+                            <i class="fas fa-tag"></i> Avg. price: <strong>28,000 UGX</strong>
+                        </div>
+                        <div class="restaurant-tags">
+                            <div class="delivery-tag">PREMIUM QUALITY</div>
+                        </div>
+                        <div class="rating">
+                            <div class="stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                            <div class="rating-value">4.6</div>
+                            <div class="rating-count">(201)</div>
                         </div>
                     </div>
                 </div>
@@ -2423,13 +3420,13 @@
         
         <div class="profile-section">
             <div class="profile-menu">
-                <div class="profile-menu-item">
+                <div class="profile-menu-item" onclick="showOrderHistory()">
                     <i class="fas fa-receipt"></i>
                     <span>Order History</span>
                     <i class="fas fa-chevron-right"></i>
                 </div>
                 
-                <div class="profile-menu-item">
+                <div class="profile-menu-item" onclick="showFavorites()">
                     <i class="fas fa-heart"></i>
                     <span>Favorites</span>
                     <i class="fas fa-chevron-right"></i>
@@ -2465,12 +3462,27 @@
                     <i class="fas fa-chevron-right"></i>
                 </div>
                 
-                <div class="profile-menu-item" style="border-color: var(--secondary); color: var(--secondary);">
+                <div class="profile-menu-item" style="border-color: var(--secondary); color: var(--secondary);" onclick="logout()">
                     <i class="fas fa-sign-out-alt"></i>
                     <span>Logout</span>
                     <i class="fas fa-chevron-right"></i>
                 </div>
             </div>
+        </div>
+    </div>
+    
+    <!-- Order History Page -->
+    <div class="overlay-page" id="orderHistoryPage">
+        <div class="page-header">
+            <div class="close-btn" onclick="hideOrderHistory()">
+                <i class="fas fa-arrow-left"></i>
+            </div>
+            <div class="page-title">Order History</div>
+            <div></div>
+        </div>
+        
+        <div class="profile-section" id="orderHistoryContent">
+            <!-- Order history will be dynamically populated -->
         </div>
     </div>
     
@@ -2499,64 +3511,218 @@
             <div class="menu-category">
                 <div class="category-title">Popular Items</div>
                 
-                <div class="menu-item">
-                    <div class="menu-item-info">
-                        <div class="menu-item-name">Chicken Burger Meal</div>
-                        <div class="menu-item-desc">Juicy chicken burger served with crispy fries and a refreshing drink</div>
-                        <div class="menu-item-price">
-                            <span style="text-decoration: line-through; color: var(--gray); font-size: 14px; margin-right: 8px;">20,000 UGX</span>
-                            18,000 UGX
-                            <span style="background: var(--secondary); color: white; padding: 3px 8px; border-radius: 5px; font-size: 12px; margin-left: 8px;">10% OFF</span>
+                <div class="menu-items-grid">
+                    <div class="menu-item">
+                        <div class="menu-item-image">
+                            <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=600&h=400&fit=crop&auto=format" alt="Chicken Burger Meal" loading="lazy" onerror="this.style.display='none'; this.parentElement.innerHTML='<div style=\'padding:20px;text-align:center;color:#999;\'>🍔<br>Image Loading...</div>'">
                         </div>
-                        <button class="add-to-cart-btn" onclick="addToCart('Chicken Burger Meal', 18000, 'chicken')">
-                            <i class="fas fa-plus"></i> Add to Cart
-                        </button>
-                    </div>
-                    <div class="menu-item-image"></div>
-                </div>
-                
-                <div class="menu-item">
-                    <div class="menu-item-info">
-                        <div class="menu-item-name">Grilled Chicken</div>
-                        <div class="menu-item-desc">Tender grilled chicken served with fresh vegetables and your choice of sauce</div>
-                        <div class="menu-item-price">
-                            <span style="text-decoration: line-through; color: var(--gray); font-size: 14px; margin-right: 8px;">25,000 UGX</span>
-                            22,000 UGX
-                            <span style="background: var(--secondary); color: white; padding: 3px 8px; border-radius: 5px; font-size: 12px; margin-left: 8px;">12% OFF</span>
+                        <div class="menu-item-info">
+                            <div class="menu-item-name">Chicken Burger Meal</div>
+                            <div class="menu-item-rating">
+                                <div class="stars">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star-half-alt"></i>
+                                </div>
+                                <span class="rating-text">4.5</span>
+                                <span class="rating-count">(320 reviews)</span>
+                            </div>
+                            <div class="menu-item-desc">Juicy grilled chicken burger with crispy golden fries, fresh lettuce, tomatoes, and a refreshing soft drink. Perfect combo!</div>
+                            <div class="menu-item-price">
+                                <span style="text-decoration: line-through; color: var(--gray); font-size: 14px; margin-right: 8px;">20,000 UGX</span>
+                                18,000 UGX
+                            </div>
+                            <button class="add-to-cart-btn" onclick="addToCart('Chicken Burger Meal', 18000, 'chicken')">
+                                <i class="fas fa-plus"></i> Add to Cart
+                            </button>
                         </div>
-                        <button class="add-to-cart-btn" onclick="addToCart('Grilled Chicken', 22000, 'grilled')">
-                            <i class="fas fa-plus"></i> Add to Cart
-                        </button>
                     </div>
-                    <div class="menu-item-image"></div>
+                    
+                    <div class="menu-item">
+                        <div class="menu-item-image">
+                            <img src="https://images.unsplash.com/photo-1626082927389-6cd097cdc6ec?w=600&h=400&fit=crop&auto=format" alt="Grilled Chicken" loading="lazy" onerror="this.style.display='none'; this.parentElement.innerHTML='<div style=\'padding:20px;text-align:center;color:#999;\'>🍗<br>Image Loading...</div>'">
+                        </div>
+                        <div class="menu-item-info">
+                            <div class="menu-item-name">Grilled Chicken</div>
+                            <div class="menu-item-rating">
+                                <div class="stars">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                                <span class="rating-text">5.0</span>
+                                <span class="rating-count">(485 reviews)</span>
+                            </div>
+                            <div class="menu-item-desc">Perfectly seasoned tender grilled chicken breast served with steamed vegetables, mashed potatoes, and savory herb sauce.</div>
+                            <div class="menu-item-price">
+                                <span style="text-decoration: line-through; color: var(--gray); font-size: 14px; margin-right: 8px;">25,000 UGX</span>
+                                22,000 UGX
+                            </div>
+                            <button class="add-to-cart-btn" onclick="addToCart('Grilled Chicken', 22000, 'grilled')">
+                                <i class="fas fa-plus"></i> Add to Cart
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="menu-item">
+                        <div class="menu-item-image">
+                            <img src="https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?w=600&h=400&fit=crop&auto=format" alt="Spicy Chicken Wings" loading="lazy" onerror="this.style.display='none'; this.parentElement.innerHTML='<div style=\'padding:20px;text-align:center;color:#999;\'>🍗<br>Image Loading...</div>'">
+                        </div>
+                        <div class="menu-item-info">
+                            <div class="menu-item-name">Spicy Chicken Wings</div>
+                            <div class="menu-item-rating">
+                                <div class="stars">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="far fa-star"></i>
+                                </div>
+                                <span class="rating-text">4.2</span>
+                                <span class="rating-count">(278 reviews)</span>
+                            </div>
+                            <div class="menu-item-desc">Crispy fried chicken wings tossed in our signature spicy buffalo sauce. Served with cool ranch dipping sauce and celery sticks.</div>
+                            <div class="menu-item-price">16,000 UGX</div>
+                            <button class="add-to-cart-btn" onclick="addToCart('Spicy Chicken Wings', 16000, 'wings')">
+                                <i class="fas fa-plus"></i> Add to Cart
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="menu-item">
+                        <div class="menu-item-image">
+                            <img src="https://images.unsplash.com/photo-1607013251379-e6eecfffe234?w=600&h=400&fit=crop&auto=format" alt="Chicken Wrap" loading="lazy" onerror="this.style.display='none'; this.parentElement.innerHTML='<div style=\'padding:20px;text-align:center;color:#999;\'>🌯<br>Image Loading...</div>'">
+                        </div>
+                        <div class="menu-item-info">
+                            <div class="menu-item-name">Chicken Wrap</div>
+                            <div class="menu-item-rating">
+                                <div class="stars">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star-half-alt"></i>
+                                </div>
+                                <span class="rating-text">4.6</span>
+                                <span class="rating-count">(402 reviews)</span>
+                            </div>
+                            <div class="menu-item-desc">Grilled chicken strips wrapped in soft tortilla with fresh lettuce, tomatoes, onions, cheese, and creamy garlic mayo sauce.</div>
+                            <div class="menu-item-price">14,000 UGX</div>
+                            <button class="add-to-cart-btn" onclick="addToCart('Chicken Wrap', 14000, 'wrap')">
+                                <i class="fas fa-plus"></i> Add to Cart
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="menu-item">
+                        <div class="menu-item-image">
+                            <img src="https://images.unsplash.com/photo-1562059392-096320bccc7e?w=600&h=400&fit=crop&auto=format" alt="Chicken Nuggets" loading="lazy" onerror="this.style.display='none'; this.parentElement.innerHTML='<div style=\'padding:20px;text-align:center;color:#999;\'>🍗<br>Image Loading...</div>'">
+                        </div>
+                        <div class="menu-item-info">
+                            <div class="menu-item-name">Chicken Nuggets</div>
+                            <div class="menu-item-rating">
+                                <div class="stars">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                                <span class="rating-text">4.8</span>
+                                <span class="rating-count">(567 reviews)</span>
+                            </div>
+                            <div class="menu-item-desc">10 pieces of golden crispy chicken nuggets made from tender breast meat. Served with BBQ and honey mustard dipping sauces.</div>
+                            <div class="menu-item-price">12,000 UGX</div>
+                            <button class="add-to-cart-btn" onclick="addToCart('Chicken Nuggets', 12000, 'nuggets')">
+                                <i class="fas fa-plus"></i> Add to Cart
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="menu-item">
+                        <div class="menu-item-image">
+                            <img src="https://images.unsplash.com/photo-1606755962773-d324e0a13086?w=600&h=400&fit=crop&auto=format" alt="Caesar Salad" loading="lazy" onerror="this.style.display='none'; this.parentElement.innerHTML='<div style=\'padding:20px;text-align:center;color:#999;\'>🥗<br>Image Loading...</div>'">
+                        </div>
+                        <div class="menu-item-info">
+                            <div class="menu-item-name">Caesar Salad</div>
+                            <div class="menu-item-rating">
+                                <div class="stars">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star-half-alt"></i>
+                                </div>
+                                <span class="rating-text">4.4</span>
+                                <span class="rating-count">(215 reviews)</span>
+                            </div>
+                            <div class="menu-item-desc">Fresh crispy romaine lettuce with grilled chicken, parmesan cheese, crunchy croutons, and classic Caesar dressing.</div>
+                            <div class="menu-item-price">15,000 UGX</div>
+                            <button class="add-to-cart-btn" onclick="addToCart('Caesar Salad', 15000, 'salad')">
+                                <i class="fas fa-plus"></i> Add to Cart
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
             
             <div class="menu-category">
-                <div class="category-title">Sides</div>
+                <div class="category-title">Sides & Drinks</div>
                 
-                <div class="menu-item">
-                    <div class="menu-item-info">
-                        <div class="menu-item-name">French Fries</div>
-                        <div class="menu-item-desc">Large portion of golden crispy fries served with ketchup</div>
-                        <div class="menu-item-price">5,000 UGX</div>
-                        <button class="add-to-cart-btn" onclick="addToCart('French Fries', 5000, 'fries')">
-                            <i class="fas fa-plus"></i> Add to Cart
-                        </button>
+                <div class="menu-items-grid">
+                    <div class="menu-item">
+                        <div class="menu-item-image">
+                            <img src="https://images.unsplash.com/photo-1573080496219-bb080dd4f877?w=600&h=400&fit=crop&auto=format" alt="French Fries" loading="lazy" onerror="this.style.display='none'; this.parentElement.innerHTML='<div style=\'padding:20px;text-align:center;color:#999;\'>🍟<br>Image Loading...</div>'">
+                        </div>
+                        <div class="menu-item-info">
+                            <div class="menu-item-name">French Fries</div>
+                            <div class="menu-item-rating">
+                                <div class="stars">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star-half-alt"></i>
+                                </div>
+                                <span class="rating-text">4.7</span>
+                                <span class="rating-count">(623 reviews)</span>
+                            </div>
+                            <div class="menu-item-desc">Perfectly seasoned golden crispy french fries. Served hot with tomato ketchup and special mayo dip.</div>
+                            <div class="menu-item-price">5,000 UGX</div>
+                            <button class="add-to-cart-btn" onclick="addToCart('French Fries', 5000, 'fries')">
+                                <i class="fas fa-plus"></i> Add to Cart
+                            </button>
+                        </div>
                     </div>
-                    <div class="menu-item-image"></div>
-                </div>
-                
-                <div class="menu-item">
-                    <div class="menu-item-info">
-                        <div class="menu-item-name">Coleslaw</div>
-                        <div class="menu-item-desc">Fresh cabbage and carrot salad with creamy dressing</div>
-                        <div class="menu-item-price">3,500 UGX</div>
-                        <button class="add-to-cart-btn" onclick="addToCart('Coleslaw', 3500, 'coleslaw')">
-                            <i class="fas fa-plus"></i> Add to Cart
-                        </button>
+                    
+                    <div class="menu-item">
+                        <div class="menu-item-image">
+                            <img src="https://images.unsplash.com/photo-1546548970-71785318a17b?w=600&h=400&fit=crop&auto=format" alt="Soft Drink" loading="lazy" onerror="this.style.display='none'; this.parentElement.innerHTML='<div style=\'padding:20px;text-align:center;color:#999;\'>🥤<br>Image Loading...</div>'">
+                        </div>
+                        <div class="menu-item-info">
+                            <div class="menu-item-name">Soft Drink</div>
+                            <div class="menu-item-rating">
+                                <div class="stars">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                                <span class="rating-text">4.9</span>
+                                <span class="rating-count">(891 reviews)</span>
+                            </div>
+                            <div class="menu-item-desc">Ice-cold refreshing soft drink. Choose from Coca-Cola, Sprite, Fanta, or Pepsi. Served in 500ml bottle.</div>
+                            <div class="menu-item-price">3,000 UGX</div>
+                            <button class="add-to-cart-btn" onclick="addToCart('Soft Drink', 3000, 'drink')">
+                                <i class="fas fa-plus"></i> Add to Cart
+                            </button>
+                        </div>
                     </div>
-                    <div class="menu-item-image"></div>
                 </div>
             </div>
         </div>
@@ -2585,10 +3751,17 @@
         let activeThumb = null;
 
         // Cart data
-        let cart = {
-            'chicken': { name: 'Chicken Burger Meal', price: 18000, quantity: 1 },
-            'fries': { name: 'French Fries', price: 5000, quantity: 1 },
-            'cola': { name: 'Cola Drink', price: 3000, quantity: 1 }
+        let cart = {};
+        
+        // User preferences and state
+        let userState = {
+            favorites: [],
+            orderHistory: [],
+            savedAddresses: ['Makerere University, Kampala'],
+            preferences: {
+                theme: 'light',
+                notifications: true
+            }
         };
 
         // Filter states
@@ -2598,25 +3771,180 @@
 
         // Food items database (for food listing page)
         const foodItems = [
-            { id: 1, name: 'Margherita Pizza', restaurant: 'Pizza Palace', price: 13500, originalPrice: 18000, discount: 10, image: 'pizza' },
-            { id: 2, name: 'Chicken Burger', restaurant: 'Burger House', price: 12000, originalPrice: 15000, discount: 20, image: 'burger' },
-            { id: 3, name: 'Pepperoni Pizza', restaurant: 'Urban Pizza', price: 24000, originalPrice: 28000, discount: 15, image: 'pizza' },
-            { id: 4, name: 'Caesar Salad', restaurant: 'Healthy Eats', price: 8000, originalPrice: 10000, discount: 20, image: 'salad' },
-            { id: 5, name: 'Chicken Alfredo Pasta', restaurant: 'Italian Bistro', price: 18000, originalPrice: 22000, discount: 18, image: 'pasta' },
-            { id: 6, name: 'Beef Tacos', restaurant: 'Taco Express', price: 10000, originalPrice: 12000, discount: 15, image: 'taco' },
-            { id: 7, name: 'Sushi Platter', restaurant: 'Sushi Bar', price: 32000, originalPrice: 40000, discount: 20, image: 'sushi' },
-            { id: 8, name: 'Grilled Chicken', restaurant: 'Chicken Tonight', price: 22000, originalPrice: 25000, discount: 12, image: 'chicken' }
+            { id: 1, name: 'Margherita Pizza', restaurant: 'Pizza Palace', price: 13500, originalPrice: 18000, discount: 10, image: 'pizza', category: 'Italian' },
+            { id: 2, name: 'Chicken Burger', restaurant: 'Burger House', price: 12000, originalPrice: 15000, discount: 20, image: 'burger', category: 'Fast Food' },
+            { id: 3, name: 'Pepperoni Pizza', restaurant: 'Urban Pizza', price: 24000, originalPrice: 28000, discount: 15, image: 'pizza', category: 'Italian' },
+            { id: 4, name: 'Caesar Salad', restaurant: 'Healthy Eats', price: 8000, originalPrice: 10000, discount: 20, image: 'salad', category: 'Healthy' },
+            { id: 5, name: 'Chicken Alfredo Pasta', restaurant: 'Italian Bistro', price: 18000, originalPrice: 22000, discount: 18, image: 'pasta', category: 'Italian' },
+            { id: 6, name: 'Beef Tacos', restaurant: 'Taco Express', price: 10000, originalPrice: 12000, discount: 15, image: 'taco', category: 'Mexican' },
+            { id: 7, name: 'Sushi Platter', restaurant: 'Sushi Bar', price: 32000, originalPrice: 40000, discount: 20, image: 'sushi', category: 'Japanese' },
+            { id: 8, name: 'Grilled Chicken', restaurant: 'Chicken Tonight', price: 22000, originalPrice: 25000, discount: 12, image: 'chicken', category: 'Fast Food' }
         ];
+
+        // Load saved state from localStorage
+        function loadState() {
+            try {
+                const savedCart = localStorage.getItem('glovoCart');
+                if (savedCart) {
+                    cart = JSON.parse(savedCart);
+                }
+                
+                const savedUserState = localStorage.getItem('glovoUserState');
+                if (savedUserState) {
+                    userState = { ...userState, ...JSON.parse(savedUserState) };
+                }
+                
+                const savedBudget = localStorage.getItem('glovoBudget');
+                if (savedBudget) {
+                    const budget = JSON.parse(savedBudget);
+                    currentMinBudget = budget.min;
+                    currentMaxBudget = budget.max;
+                }
+            } catch (error) {
+                console.error('Error loading state:', error);
+            }
+        }
+
+        // Save state to localStorage
+        function saveState() {
+            try {
+                localStorage.setItem('glovoCart', JSON.stringify(cart));
+                localStorage.setItem('glovoUserState', JSON.stringify(userState));
+                localStorage.setItem('glovoBudget', JSON.stringify({
+                    min: currentMinBudget,
+                    max: currentMaxBudget
+                }));
+            } catch (error) {
+                console.error('Error saving state:', error);
+            }
+        }
+
+        // Add order to history
+        function addToOrderHistory(order) {
+            const orderWithTimestamp = {
+                ...order,
+                id: Date.now(),
+                date: new Date().toISOString(),
+                status: 'completed'
+            };
+            userState.orderHistory.unshift(orderWithTimestamp);
+            if (userState.orderHistory.length > 20) {
+                userState.orderHistory = userState.orderHistory.slice(0, 20);
+            }
+            saveState();
+        }
 
         // Initialize on page load
         document.addEventListener('DOMContentLoaded', function() {
+            loadState();
             initializeBudgetSlider();
             initializeBudgetInputs();
             filterRestaurants();
             updateCartDisplay();
             initializeFilters();
             initializePaymentOptions();
+            initializeSearch();
+            initializeKeyboardNavigation();
+            
+            // Show welcome message for first-time users
+            if (!localStorage.getItem('glovoReturningUser')) {
+                setTimeout(() => {
+                    showToast('Welcome to Glovo! Set your budget to discover restaurants.');
+                    localStorage.setItem('glovoReturningUser', 'true');
+                }, 1000);
+            }
         });
+
+        // Initialize search functionality
+        function initializeSearch() {
+            const searchInput = document.getElementById('searchInput');
+            if (searchInput) {
+                let searchTimeout;
+                searchInput.addEventListener('input', function(e) {
+                    clearTimeout(searchTimeout);
+                    searchTimeout = setTimeout(() => {
+                        performSearch(e.target.value);
+                    }, 300);
+                });
+            }
+        }
+
+        // Perform search across restaurants and food items
+        function performSearch(searchTerm) {
+            searchTerm = searchTerm.toLowerCase().trim();
+            const restaurants = document.querySelectorAll('.restaurant-card');
+            
+            if (searchTerm.length === 0) {
+                restaurants.forEach(card => {
+                    if (!card.classList.contains('hidden')) {
+                        card.style.display = '';
+                    }
+                });
+                return;
+            }
+            
+            let foundCount = 0;
+            restaurants.forEach(card => {
+                const name = card.querySelector('.restaurant-name').textContent.toLowerCase();
+                const details = card.querySelector('.restaurant-details').textContent.toLowerCase();
+                
+                if (name.includes(searchTerm) || details.includes(searchTerm)) {
+                    card.style.display = '';
+                    foundCount++;
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+            
+            if (foundCount === 0) {
+                showToast(`No results found for "${searchTerm}". Try different keywords.`);
+            } else {
+                // Announce results to screen readers
+                const alert = document.createElement('div');
+                alert.setAttribute('role', 'status');
+                alert.setAttribute('aria-live', 'polite');
+                alert.className = 'sr-only';
+                alert.textContent = `Found ${foundCount} restaurant${foundCount !== 1 ? 's' : ''}`;
+                document.body.appendChild(alert);
+                setTimeout(() => alert.remove(), 1000);
+            }
+        }
+
+        // Initialize keyboard navigation
+        function initializeKeyboardNavigation() {
+            // Escape key to close overlays
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') {
+                    hideCart();
+                    hideProfile();
+                    hideFoodItems();
+                    hideRestaurantDetail();
+                    const sortMenu = document.getElementById('sortMenu');
+                    if (sortMenu) sortMenu.classList.remove('active');
+                    
+                    // Close food type dropdown
+                    const foodTypeDropdown = document.getElementById('foodTypeDropdown');
+                    const foodTypeFilter = document.getElementById('foodTypeFilter');
+                    if (foodTypeDropdown && foodTypeDropdown.classList.contains('show')) {
+                        foodTypeDropdown.classList.remove('show');
+                        if (foodTypeFilter) {
+                            foodTypeFilter.classList.remove('expanded');
+                            foodTypeFilter.setAttribute('aria-expanded', 'false');
+                        }
+                    }
+                }
+            });
+            
+            // Enter/Space for filter chips
+            document.querySelectorAll('.filter-chip').forEach(chip => {
+                chip.addEventListener('keydown', function(e) {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        this.click();
+                    }
+                });
+            });
+        }
 
         // Initialize filter functionality
         function initializeFilters() {
@@ -2627,11 +3955,15 @@
             if (sortChip && sortMenu) {
                 sortChip.addEventListener('click', (e) => {
                     e.stopPropagation();
-                    sortMenu.classList.toggle('active');
+                    const isActive = sortMenu.classList.toggle('active');
+                    sortChip.classList.toggle('active', isActive);
+                    sortChip.setAttribute('aria-expanded', isActive);
                 });
 
                 document.addEventListener('click', () => {
                     sortMenu.classList.remove('active');
+                    sortChip.classList.remove('active');
+                    sortChip.setAttribute('aria-expanded', 'false');
                 });
 
                 document.querySelectorAll('.sort-option').forEach(option => {
@@ -2644,6 +3976,9 @@
                         // Update chip text
                         const chipText = sortChip.childNodes[2];
                         chipText.textContent = ' ' + this.textContent.trim() + ' ';
+                        
+                        // Show toast notification
+                        showToast(`Sorted by: ${this.textContent.trim()}`);
                     });
                 });
             }
@@ -2654,15 +3989,98 @@
                 promotionsFilter.addEventListener('click', function() {
                     this.classList.toggle('active');
                     showPromotionsOnly = this.classList.contains('active');
+                    const isPressed = this.classList.contains('active');
+                    this.setAttribute('aria-pressed', isPressed);
                     filterRestaurants();
+                    showToast(isPressed ? 'Showing restaurants with promotions only' : 'Showing all restaurants');
                 });
             }
 
-            // Food type filter (simple implementation)
+            // Food type filter (full implementation)
             const foodTypeFilter = document.getElementById('foodTypeFilter');
-            if (foodTypeFilter) {
-                foodTypeFilter.addEventListener('click', function() {
-                    showToast('Food type filtering coming soon!');
+            const foodTypeDropdown = document.getElementById('foodTypeDropdown');
+            const closeFoodTypeModal = document.getElementById('closeFoodTypeModal');
+            const clearFoodTypes = document.getElementById('clearFoodTypes');
+            const applyFoodTypes = document.getElementById('applyFoodTypes');
+            const foodTypeOptions = document.querySelectorAll('.food-type-option');
+
+            if (foodTypeFilter && foodTypeDropdown) {
+                // Open dropdown
+                foodTypeFilter.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    foodTypeDropdown.classList.add('show');
+                    foodTypeFilter.classList.add('expanded');
+                    foodTypeFilter.setAttribute('aria-expanded', 'true');
+                    // Focus first option
+                    const firstOption = document.querySelector('.food-type-option');
+                    if (firstOption) firstOption.focus();
+                });
+
+                // Close dropdown
+                function closeFoodTypeDropdown() {
+                    foodTypeDropdown.classList.remove('show');
+                    foodTypeFilter.classList.remove('expanded');
+                    foodTypeFilter.setAttribute('aria-expanded', 'false');
+                }
+
+                closeFoodTypeModal.addEventListener('click', closeFoodTypeDropdown);
+                
+                // Close on backdrop click
+                foodTypeDropdown.addEventListener('click', function(e) {
+                    if (e.target === foodTypeDropdown) {
+                        closeFoodTypeDropdown();
+                    }
+                });
+
+                // Handle food type option selection
+                foodTypeOptions.forEach(option => {
+                    option.addEventListener('click', function() {
+                        this.classList.toggle('selected');
+                        const isSelected = this.classList.contains('selected');
+                        this.setAttribute('aria-checked', isSelected);
+                        
+                        // Update selected food types array
+                        const foodType = this.getAttribute('data-food-type');
+                        if (isSelected) {
+                            if (!selectedFoodTypes.includes(foodType)) {
+                                selectedFoodTypes.push(foodType);
+                            }
+                        } else {
+                            selectedFoodTypes = selectedFoodTypes.filter(type => type !== foodType);
+                        }
+                    });
+
+                    // Keyboard support for options
+                    option.addEventListener('keydown', function(e) {
+                        if (e.key === 'Enter' || e.key === ' ') {
+                            e.preventDefault();
+                            this.click();
+                        }
+                    });
+                });
+
+                // Clear all selections
+                clearFoodTypes.addEventListener('click', function() {
+                    foodTypeOptions.forEach(option => {
+                        option.classList.remove('selected');
+                        option.setAttribute('aria-checked', 'false');
+                    });
+                    selectedFoodTypes = [];
+                });
+
+                // Apply filters
+                applyFoodTypes.addEventListener('click', function() {
+                    closeFoodTypeDropdown();
+                    filterRestaurants();
+                    
+                    // Update filter button appearance
+                    if (selectedFoodTypes.length > 0) {
+                        foodTypeFilter.classList.add('active');
+                        showToast(`Filtering by ${selectedFoodTypes.length} food type${selectedFoodTypes.length > 1 ? 's' : ''}`);
+                    } else {
+                        foodTypeFilter.classList.remove('active');
+                        showToast('Showing all food types');
+                    }
                 });
             }
         }
@@ -2787,6 +4205,117 @@
             addToCart(name, price, id);
         }
 
+        // Order History functions
+        function showOrderHistory() {
+            const page = document.getElementById('orderHistoryPage');
+            const content = document.getElementById('orderHistoryContent');
+            
+            if (userState.orderHistory.length === 0) {
+                content.innerHTML = `
+                    <div class="empty-state">
+                        <i class="fas fa-receipt"></i>
+                        <h3>No orders yet</h3>
+                        <p>Your order history will appear here after you place your first order.</p>
+                    </div>
+                `;
+            } else {
+                let historyHTML = '<div style="padding: 20px;">';
+                userState.orderHistory.forEach(order => {
+                    const date = new Date(order.date);
+                    const dateStr = date.toLocaleDateString('en-US', { 
+                        year: 'numeric', 
+                        month: 'short', 
+                        day: 'numeric',
+                        hour: '2-digit',
+                        minute: '2-digit'
+                    });
+                    
+                    let itemsList = '';
+                    for (let itemId in order.items) {
+                        const item = order.items[itemId];
+                        itemsList += `<div style="margin-bottom: 5px; color: var(--gray); font-size: 14px;">
+                            ${item.quantity}x ${item.name} - ${formatCurrency(item.price * item.quantity)}
+                        </div>`;
+                    }
+                    
+                    historyHTML += `
+                        <div style="background: white; border: 1px solid var(--border); border-radius: var(--radius); padding: 15px; margin-bottom: 15px;">
+                            <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 10px;">
+                                <div>
+                                    <div style="font-weight: 700; font-size: 16px; margin-bottom: 5px;">Order #${order.id}</div>
+                                    <div style="font-size: 13px; color: var(--gray);">${dateStr}</div>
+                                </div>
+                                <div style="background: #E8F5E9; color: #2E7D32; padding: 5px 12px; border-radius: 20px; font-size: 12px; font-weight: 600;">
+                                    ${order.status}
+                                </div>
+                            </div>
+                            ${itemsList}
+                            <div style="margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center;">
+                                <div style="color: var(--gray); font-size: 14px;">Payment: ${order.paymentMethod.replace('-', ' ')}</div>
+                                <div style="font-weight: 700; font-size: 18px; color: var(--primary);">${formatCurrency(order.total)}</div>
+                            </div>
+                            <button class="add-to-cart-btn" style="width: 100%; margin-top: 10px;" onclick="reorder('${order.id}')">
+                                <i class="fas fa-redo"></i> Reorder
+                            </button>
+                        </div>
+                    `;
+                });
+                historyHTML += '</div>';
+                content.innerHTML = historyHTML;
+            }
+            
+            page.style.display = 'block';
+        }
+
+        function hideOrderHistory() {
+            document.getElementById('orderHistoryPage').style.display = 'none';
+        }
+
+        function reorder(orderId) {
+            const order = userState.orderHistory.find(o => o.id == orderId);
+            if (order) {
+                cart = { ...order.items };
+                saveState();
+                updateCartDisplay();
+                updateCartCount();
+                hideOrderHistory();
+                hideProfile();
+                showToast('Items added to cart! You can modify quantities before checkout.');
+            }
+        }
+
+        // Favorites functions
+        function showFavorites() {
+            if (userState.favorites.length === 0) {
+                showToast('You haven\'t added any favorites yet. Tap the heart icon on restaurants!');
+            } else {
+                showToast('Favorites feature coming soon! You have ' + userState.favorites.length + ' favorites.');
+            }
+        }
+
+        function toggleFavorite(restaurantId) {
+            const index = userState.favorites.indexOf(restaurantId);
+            if (index > -1) {
+                userState.favorites.splice(index, 1);
+                showToast('Removed from favorites');
+            } else {
+                userState.favorites.push(restaurantId);
+                showToast('Added to favorites');
+            }
+            saveState();
+        }
+
+        // Logout function
+        function logout() {
+            if (confirm('Are you sure you want to logout? Your cart will be saved.')) {
+                saveState();
+                showToast('Logged out successfully');
+                setTimeout(() => {
+                    hideProfile();
+                }, 1000);
+            }
+        }
+
         // Budget Slider Functions
         function initializeBudgetSlider() {
             const slider = document.getElementById('budgetSlider');
@@ -2875,6 +4404,7 @@
                 isDragging = false;
                 activeThumb = null;
                 filterRestaurants();
+                saveState(); // Save budget changes
             }
         }
 
@@ -2912,6 +4442,7 @@
 
             minInput.addEventListener('blur', function() {
                 this.value = formatCurrency(currentMinBudget);
+                saveState();
             });
 
             maxInput.addEventListener('input', function() {
@@ -2925,6 +4456,7 @@
 
             maxInput.addEventListener('blur', function() {
                 this.value = formatCurrency(currentMaxBudget);
+                saveState();
             });
         }
 
@@ -2941,12 +4473,24 @@
             restaurants.forEach((card, index) => {
                 const avgPrice = parseInt(card.getAttribute('data-avg-price'));
                 const hasDiscount = card.querySelector('.discount-tag') !== null;
+                const restaurantFoodTypes = card.getAttribute('data-food-types') || '';
                 
                 let shouldShow = avgPrice >= currentMinBudget && avgPrice <= currentMaxBudget;
                 
                 // Apply promotions filter
                 if (showPromotionsOnly && !hasDiscount) {
                     shouldShow = false;
+                }
+                
+                // Apply food type filter
+                if (selectedFoodTypes.length > 0 && shouldShow) {
+                    const restaurantTypes = restaurantFoodTypes.split(',');
+                    const hasMatchingType = selectedFoodTypes.some(selectedType => 
+                        restaurantTypes.includes(selectedType)
+                    );
+                    if (!hasMatchingType) {
+                        shouldShow = false;
+                    }
                 }
                 
                 setTimeout(() => {
@@ -2972,6 +4516,37 @@
                     hideEmptyState();
                 }
             }, 100);
+        }
+
+        // Quick filter functions
+        function filterByType(type) {
+            // Toggle food type filter
+            const index = selectedFoodTypes.indexOf(type);
+            if (index > -1) {
+                selectedFoodTypes.splice(index, 1);
+            } else {
+                selectedFoodTypes = [type]; // Single selection
+            }
+            
+            // Update button states
+            const buttons = document.querySelectorAll('.quick-filter-btn');
+            buttons.forEach(btn => {
+                const btnText = btn.textContent.toLowerCase();
+                if (btnText.includes(type.toLowerCase())) {
+                    btn.classList.add('active');
+                } else {
+                    btn.classList.remove('active');
+                }
+            });
+            
+            filterRestaurants();
+        }
+
+        function showAllRestaurants() {
+            selectedFoodTypes = [];
+            const buttons = document.querySelectorAll('.quick-filter-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+            filterRestaurants();
         }
 
         function showEmptyState() {
@@ -3075,7 +4650,11 @@
                 deliveryLine.style.fontWeight = deliveryFee === 0 ? '700' : '';
             }
             
+            // Budget validation
+            checkBudgetCompliance(total);
+            
             updateCartCount();
+            saveState();
 
             // Show empty cart message if cart is empty
             if (Object.keys(cart).length === 0) {
@@ -3089,6 +4668,20 @@
                         </div>
                     `;
                 }
+            }
+        }
+        
+        // Check if cart total is within budget
+        function checkBudgetCompliance(total) {
+            const warningDiv = document.getElementById('budgetWarning');
+            const warningText = document.getElementById('budgetWarningText');
+            
+            if (total > currentMaxBudget && Object.keys(cart).length > 0) {
+                const excess = total - currentMaxBudget;
+                warningText.textContent = `Your cart total (${formatCurrency(total)}) exceeds your maximum budget by ${formatCurrency(excess)}. Consider removing some items.`;
+                warningDiv.classList.add('show');
+            } else {
+                warningDiv.classList.remove('show');
             }
         }
         
@@ -3118,16 +4711,25 @@
         }
         
         function addToCart(itemName, price, itemId) {
-            showToast(`${itemName} added to cart!`);
+            // Animate the add to cart button
+            const buttons = document.querySelectorAll(`button[onclick*="${itemId}"]`);
+            buttons.forEach(btn => {
+                btn.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    btn.style.transform = 'scale(1)';
+                }, 200);
+            });
             
             if (cart[itemId]) {
                 cart[itemId].quantity++;
+                showToast(`${itemName} quantity increased to ${cart[itemId].quantity}`);
             } else {
                 cart[itemId] = {
                     name: itemName,
                     price: price,
                     quantity: 1
                 };
+                showToast(`${itemName} added to cart!`);
 
                 // Add to cart display if cart page is open
                 if (document.getElementById('cartPage').style.display === 'block') {
@@ -3135,8 +4737,18 @@
                 }
             }
             
+            saveState();
             updateCartCount();
             updateCartDisplay();
+            
+            // Announce to screen readers
+            const announcement = document.createElement('div');
+            announcement.setAttribute('role', 'status');
+            announcement.setAttribute('aria-live', 'polite');
+            announcement.className = 'sr-only';
+            announcement.textContent = `${itemName} added to cart`;
+            document.body.appendChild(announcement);
+            setTimeout(() => announcement.remove(), 1000);
         }
 
         function addCartItemToDisplay(itemId, itemName, price) {
@@ -3172,16 +4784,101 @@
         }
         
         function checkout() {
-            const total = document.getElementById('total-cost').textContent;
-            showToast(`Order placed successfully! Total: ${total}`);
+            if (Object.keys(cart).length === 0) {
+                showToast('Your cart is empty. Add items to proceed.');
+                return;
+            }
             
+            // Calculate order totals
+            let subtotal = 0;
+            for (let itemId in cart) {
+                subtotal += cart[itemId].price * cart[itemId].quantity;
+            }
+            
+            const discount = subtotal * 0.2;
+            const deliveryFee = subtotal > 25000 ? 0 : 3000;
+            const serviceFee = 1500;
+            const total = subtotal - discount + deliveryFee + serviceFee;
+            
+            // Get selected payment method
+            const selectedPayment = document.querySelector('input[name="payment"]:checked');
+            const paymentMethod = selectedPayment ? selectedPayment.value : 'mobile-money';
+            
+            // Check budget compliance
+            if (total > currentMaxBudget) {
+                showToast('Order total exceeds your budget. Please remove some items.');
+                return;
+            }
+            
+            // Show loading
+            showLoading('Processing your order...');
+            
+            // Simulate order processing
             setTimeout(() => {
-                hideCart();
-                // Reset cart after successful checkout
+                // Create order object
+                const order = {
+                    items: { ...cart },
+                    subtotal,
+                    discount,
+                    deliveryFee,
+                    serviceFee,
+                    total,
+                    paymentMethod,
+                    deliveryAddress: 'Makerere University, Kampala'
+                };
+                
+                // Add to order history
+                addToOrderHistory(order);
+                
+                // Clear cart
                 cart = {};
+                saveState();
+                
+                hideLoading();
+                hideCart();
+                
+                // Show success message
+                const successDiv = document.getElementById('successMessage');
+                const successText = document.getElementById('successMessageText');
+                successText.textContent = `Order placed successfully! Total: ${formatCurrency(total)}. Your order will arrive in 20-30 minutes.`;
+                successDiv.classList.add('show');
+                
+                setTimeout(() => {
+                    successDiv.classList.remove('show');
+                }, 5000);
+                
                 updateCartDisplay();
                 updateCartCount();
+                
+                // Announce to screen readers
+                const announcement = document.createElement('div');
+                announcement.setAttribute('role', 'alert');
+                announcement.setAttribute('aria-live', 'assertive');
+                announcement.className = 'sr-only';
+                announcement.textContent = `Order confirmed for ${formatCurrency(total)}`;
+                document.body.appendChild(announcement);
+                setTimeout(() => announcement.remove(), 3000);
             }, 2000);
+        }
+        
+        // Show loading overlay
+        function showLoading(message = 'Loading...') {
+            const overlay = document.createElement('div');
+            overlay.id = 'loadingOverlay';
+            overlay.className = 'loading-overlay show';
+            overlay.innerHTML = `
+                <div class="loading-spinner"></div>
+                <p>${message}</p>
+            `;
+            document.body.appendChild(overlay);
+        }
+        
+        // Hide loading overlay
+        function hideLoading() {
+            const overlay = document.getElementById('loadingOverlay');
+            if (overlay) {
+                overlay.remove();
+            }
         }
         
         function formatCurrency(amount) {
