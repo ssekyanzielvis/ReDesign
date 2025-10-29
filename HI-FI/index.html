@@ -1291,24 +1291,30 @@
             display: none;
             position: fixed;
             top: 0;
-            left: 50%;
-            transform: translateX(-50%);
+            left: 0;
             width: 100%;
-            max-width: 480px;
             height: 100%;
             background-color: white;
             z-index: 1000;
             overflow-y: auto;
             overflow-x: hidden;
             animation: fadeIn 0.3s ease;
+        }
+
+        /* Cart page specific styling - contained width */
+        #cartPage {
+            left: 50%;
+            transform: translateX(-50%);
+            max-width: 480px;
             box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
         }
 
         @media (max-width: 480px) {
-            .overlay-page {
+            #cartPage {
                 left: 0;
                 transform: none;
                 max-width: 100%;
+                box-shadow: none;
             }
         }
 
