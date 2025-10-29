@@ -1291,14 +1291,25 @@
             display: none;
             position: fixed;
             top: 0;
-            left: 0;
+            left: 50%;
+            transform: translateX(-50%);
             width: 100%;
+            max-width: 480px;
             height: 100%;
             background-color: white;
             z-index: 1000;
             overflow-y: auto;
             overflow-x: hidden;
             animation: fadeIn 0.3s ease;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+
+        @media (max-width: 480px) {
+            .overlay-page {
+                left: 0;
+                transform: none;
+                max-width: 100%;
+            }
         }
 
         @keyframes fadeIn {
@@ -1350,8 +1361,7 @@
 
         /* Cart Page */
         .cart-content-container {
-            max-width: 480px;
-            margin: 0 auto;
+            width: 100%;
             background-color: white;
         }
 
@@ -1879,6 +1889,11 @@
 
             .restaurant-list {
                 padding: 0 20px 30px;
+            }
+
+            .menu-items-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 16px;
             }
 
             .bottom-nav {
