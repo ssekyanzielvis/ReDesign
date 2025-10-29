@@ -1,0 +1,59 @@
+========================================
+NETLIFY DEPLOYMENT - QUICK START
+========================================
+
+Your Food Delivery Prototype is ready for deployment!
+
+OPTION 1: DRAG & DROP (EASIEST - 2 MINUTES)
+-------------------------------------------
+1. Go to: https://app.netlify.com/drop
+2. Sign in or create a free account
+3. Drag the entire "HI-FI" folder onto the page
+4. Wait 30-60 seconds
+5. Your site is LIVE! 🎉
+
+OPTION 2: GIT DEPLOYMENT (BEST FOR UPDATES)
+-------------------------------------------
+1. Push your code to GitHub (if not already done)
+2. Go to: https://app.netlify.com
+3. Click "Add new site" → "Import an existing project"
+4. Connect your GitHub repository
+5. Deploy settings:
+   - Build command: (leave empty)
+   - Publish directory: .
+6. Click "Deploy site"
+7. Done! Auto-deploys on every push 🚀
+
+WHAT'S ALREADY CONFIGURED:
+-------------------------
+✅ netlify.toml - Deployment configuration
+✅ .gitignore - Ignore unnecessary files
+✅ Security headers
+✅ Cache optimization
+✅ Mobile responsive
+✅ All assets inline (no external dependencies except CDN)
+
+CUSTOM DOMAIN (OPTIONAL):
+-------------------------
+After deployment, you can:
+- Change site name: Site Settings → Change site name
+- Add custom domain: Site Settings → Domain management
+
+TESTING YOUR DEPLOYMENT:
+------------------------
+After deployment, test:
+□ Search functionality
+□ Filter dropdowns (Food Type, Sort By, Budget)
+□ Restaurant cards display correctly
+□ Cart functionality
+□ Mobile responsiveness
+□ All images load (from Unsplash CDN)
+
+NEED HELP?
+----------
+See: NETLIFY_DEPLOYMENT_GUIDE.md (detailed guide in this folder)
+Netlify Support: https://answers.netlify.com
+
+========================================
+READY TO DEPLOY? Choose an option above!
+========================================
