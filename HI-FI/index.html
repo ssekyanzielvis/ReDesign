@@ -1349,6 +1349,12 @@
         }
 
         /* Cart Page */
+        .cart-content-container {
+            max-width: 480px;
+            margin: 0 auto;
+            background-color: white;
+        }
+
         .cart-items {
             padding: 20px;
         }
@@ -1421,7 +1427,6 @@
             margin: 20px;
             border-radius: var(--radius);
             overflow: hidden;
-            width: calc(100% - 40px);
         }
 
         .cost-line {
@@ -1451,7 +1456,10 @@
         }
 
         .checkout-btn {
-            display: block;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
             width: calc(100% - 40px);
             margin: 20px;
             padding: 18px;
@@ -1464,10 +1472,6 @@
             cursor: pointer;
             transition: var(--transition);
             box-shadow: 0 4px 12px rgba(0, 160, 130, 0.3);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
         }
 
         .checkout-btn:hover {
@@ -2088,7 +2092,7 @@
 
         .menu-items-grid {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
+            grid-template-columns: repeat(3, 1fr);
             gap: 20px;
         }
 
@@ -3294,77 +3298,78 @@
             <div></div>
         </div>
         
-        <div class="cart-items">
-            <div class="cart-item">
-                <div class="item-info">
-                    <div class="item-name">Chicken Burger Meal</div>
-                    <div class="item-desc">Comes with fries and drink</div>
-                    <div class="item-price">18,000 UGX</div>
+        <div class="cart-content-container">
+            <div class="cart-items">
+                <div class="cart-item">
+                    <div class="item-info">
+                        <div class="item-name">Chicken Burger Meal</div>
+                        <div class="item-desc">Comes with fries and drink</div>
+                        <div class="item-price">18,000 UGX</div>
+                    </div>
+                    <div class="item-controls">
+                        <div class="quantity-btn" onclick="updateQuantity('chicken', -1)">-</div>
+                        <div class="item-quantity" id="chicken-qty">1</div>
+                        <div class="quantity-btn" onclick="updateQuantity('chicken', 1)">+</div>
+                    </div>
                 </div>
-                <div class="item-controls">
-                    <div class="quantity-btn" onclick="updateQuantity('chicken', -1)">-</div>
-                    <div class="item-quantity" id="chicken-qty">1</div>
-                    <div class="quantity-btn" onclick="updateQuantity('chicken', 1)">+</div>
+                
+                <div class="cart-item">
+                    <div class="item-info">
+                        <div class="item-name">French Fries</div>
+                        <div class="item-desc">Large portion with ketchup</div>
+                        <div class="item-price">5,000 UGX</div>
+                    </div>
+                    <div class="item-controls">
+                        <div class="quantity-btn" onclick="updateQuantity('fries', -1)">-</div>
+                        <div class="item-quantity" id="fries-qty">1</div>
+                        <div class="quantity-btn" onclick="updateQuantity('fries', 1)">+</div>
+                    </div>
+                </div>
+                
+                <div class="cart-item">
+                    <div class="item-info">
+                        <div class="item-name">Cola Drink</div>
+                        <div class="item-desc">500ml bottle</div>
+                        <div class="item-price">3,000 UGX</div>
+                    </div>
+                    <div class="item-controls">
+                        <div class="quantity-btn" onclick="updateQuantity('cola', -1)">-</div>
+                        <div class="item-quantity" id="cola-qty">1</div>
+                        <div class="quantity-btn" onclick="updateQuantity('cola', 1)">+</div>
+                    </div>
                 </div>
             </div>
             
-            <div class="cart-item">
-                <div class="item-info">
-                    <div class="item-name">French Fries</div>
-                    <div class="item-desc">Large portion with ketchup</div>
-                    <div class="item-price">5,000 UGX</div>
+            <div class="cost-summary">
+                <div class="cost-line">
+                    <div>Subtotal</div>
+                    <div id="subtotal">26,000 UGX</div>
                 </div>
-                <div class="item-controls">
-                    <div class="quantity-btn" onclick="updateQuantity('fries', -1)">-</div>
-                    <div class="item-quantity" id="fries-qty">1</div>
-                    <div class="quantity-btn" onclick="updateQuantity('fries', 1)">+</div>
+                <div class="cost-line">
+                    <div>Delivery Fee</div>
+                    <div>3,000 UGX</div>
+                </div>
+                <div class="cost-line">
+                    <div>Service Fee</div>
+                    <div>1,500 UGX</div>
+                </div>
+                <div class="cost-line">
+                    <div>Discount (20% OFF)</div>
+                    <div style="color: var(--secondary);">-5,200 UGX</div>
+                </div>
+                <div class="cost-line total-cost">
+                    <div>Total</div>
+                    <div id="total-cost">25,300 UGX</div>
                 </div>
             </div>
             
-            <div class="cart-item">
-                <div class="item-info">
-                    <div class="item-name">Cola Drink</div>
-                    <div class="item-desc">500ml bottle</div>
-                    <div class="item-price">3,000 UGX</div>
+            <!-- Payment Method Section -->
+            <div class="payment-section">
+                <div class="payment-title">
+                    <i class="fas fa-credit-card"></i>
+                    Select Payment Method
                 </div>
-                <div class="item-controls">
-                    <div class="quantity-btn" onclick="updateQuantity('cola', -1)">-</div>
-                    <div class="item-quantity" id="cola-qty">1</div>
-                    <div class="quantity-btn" onclick="updateQuantity('cola', 1)">+</div>
-                </div>
-            </div>
-        </div>
-        
-        <div class="cost-summary">
-            <div class="cost-line">
-                <div>Subtotal</div>
-                <div id="subtotal">26,000 UGX</div>
-            </div>
-            <div class="cost-line">
-                <div>Delivery Fee</div>
-                <div>3,000 UGX</div>
-            </div>
-            <div class="cost-line">
-                <div>Service Fee</div>
-                <div>1,500 UGX</div>
-            </div>
-            <div class="cost-line">
-                <div>Discount (20% OFF)</div>
-                <div style="color: var(--secondary);">-5,200 UGX</div>
-            </div>
-            <div class="cost-line total-cost">
-                <div>Total</div>
-                <div id="total-cost">25,300 UGX</div>
-            </div>
-        </div>
-        
-        <!-- Payment Method Section -->
-        <div class="payment-section">
-            <div class="payment-title">
-                <i class="fas fa-credit-card"></i>
-                Select Payment Method
-            </div>
-            <div class="payment-options">
+                <div class="payment-options">
                 <label class="payment-option selected">
                     <input type="radio" name="payment" value="mobile-money" checked>
                     <div class="payment-option-content">
@@ -3398,6 +3403,7 @@
             <i class="fas fa-lock"></i>
             <span>Proceed to Checkout</span>
         </button>
+        </div>
     </div>
     
     <!-- Profile Page -->
@@ -4656,9 +4662,9 @@
             updateCartCount();
             saveState();
 
-            // Show empty cart message if cart is empty
+            // Rebuild cart items display
+            const cartItems = document.querySelector('.cart-items');
             if (Object.keys(cart).length === 0) {
-                const cartItems = document.querySelector('.cart-items');
                 if (!document.getElementById('emptyCartMessage')) {
                     cartItems.innerHTML = `
                         <div id="emptyCartMessage" class="empty-state">
@@ -4668,6 +4674,27 @@
                         </div>
                     `;
                 }
+            } else {
+                // Rebuild cart items
+                let cartHTML = '';
+                for (let itemId in cart) {
+                    const item = cart[itemId];
+                    cartHTML += `
+                        <div class="cart-item" data-item-id="${itemId}">
+                            <div class="item-info">
+                                <div class="item-name">${item.name}</div>
+                                <div class="item-desc">Fresh and delicious</div>
+                                <div class="item-price">${formatCurrency(item.price)}</div>
+                            </div>
+                            <div class="item-controls">
+                                <div class="quantity-btn" onclick="updateQuantity('${itemId}', -1)">-</div>
+                                <div class="item-quantity" id="${itemId}-qty">${item.quantity}</div>
+                                <div class="quantity-btn" onclick="updateQuantity('${itemId}', 1)">+</div>
+                            </div>
+                        </div>
+                    `;
+                }
+                cartItems.innerHTML = cartHTML;
             }
         }
         
@@ -4730,11 +4757,6 @@
                     quantity: 1
                 };
                 showToast(`${itemName} added to cart!`);
-
-                // Add to cart display if cart page is open
-                if (document.getElementById('cartPage').style.display === 'block') {
-                    addCartItemToDisplay(itemId, itemName, price);
-                }
             }
             
             saveState();
@@ -4749,38 +4771,6 @@
             announcement.textContent = `${itemName} added to cart`;
             document.body.appendChild(announcement);
             setTimeout(() => announcement.remove(), 1000);
-        }
-
-        function addCartItemToDisplay(itemId, itemName, price) {
-            const cartItems = document.querySelector('.cart-items');
-            const emptyMessage = document.getElementById('emptyCartMessage');
-            if (emptyMessage) {
-                emptyMessage.remove();
-            }
-
-            const itemDiv = document.createElement('div');
-            itemDiv.className = 'cart-item';
-            itemDiv.style.opacity = '0';
-            itemDiv.style.transform = 'translateY(20px)';
-            itemDiv.innerHTML = `
-                <div class="item-info">
-                    <div class="item-name">${itemName}</div>
-                    <div class="item-desc">Fresh and delicious</div>
-                    <div class="item-price">${formatCurrency(price)}</div>
-                </div>
-                <div class="item-controls">
-                    <div class="quantity-btn" onclick="updateQuantity('${itemId}', -1)">-</div>
-                    <div class="item-quantity" id="${itemId}-qty">1</div>
-                    <div class="quantity-btn" onclick="updateQuantity('${itemId}', 1)">+</div>
-                </div>
-            `;
-            
-            cartItems.appendChild(itemDiv);
-            
-            setTimeout(() => {
-                itemDiv.style.opacity = '1';
-                itemDiv.style.transform = 'translateY(0)';
-            }, 10);
         }
         
         function checkout() {
